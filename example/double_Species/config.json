@@ -1,0 +1,18 @@
+{
+    "main.fastq1": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/fastq/demo_1.fq.gz",
+    "main.fastq2": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/fastq/demo_2.fq.gz",
+    "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
+    "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/gtf/genes.gtf",
+    "main.ID": "demo",
+    "main.expectCell": "1500",
+    "main.chrom":"/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/species_binding.txt",
+    "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/result",
+    "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/BGI_Droplet_scRNA_readstruct_v2.json",
+    "main.Rscript":"/User/Pub/third_party/Rscript",
+    "main.refdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/star_index",
+    "main.Python3": "/User/Pub/third_party/python3",
+    "main.species":"GRCh38_mm10",
+    "main.original":"cell line",
+    "main.SampleTime":"2019-12-25",
+    "main.ExperimentalTime":"2019-12-25"
+}

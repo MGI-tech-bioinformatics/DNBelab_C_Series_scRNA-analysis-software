@@ -1,0 +1,8 @@
+### mouse database
+http://ftp.cngb.org/pub/CNSA/CNP0000906/mm10.tar.gz
+
+### human database
+http://ftp.cngb.org/pub/CNSA/CNP0000906/GRCh38.tar.gz
+
+### human & mouse database
+http://ftp.cngb.org/pub/CNSA/CNP0000906/GRCh38_mm10.tar.gz	

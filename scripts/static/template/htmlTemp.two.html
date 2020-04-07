@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="main" style="width: 100%; display: none;">
+    <div class="header">
+      <div class="header-menus">
+        <div class="header-logo">
+          <img src="data:image/png;base64,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" height="100%" />
+        </div>
+        <div class="header-line"></div>
+        <div class="iDrop_Report">
+          DNBelab<sup>TM</sup> C <label en="Series" zh="系列"></label><br/>
+          <label en="Single-Cell RNA Analysis Report V1.0.0" zh="单细胞RNA分析报告 V1.0.0" style="color: #00a19c;font-size: 24px;"></label>
+        </div>
+      </div>
+      <div class="header-menus">
+        <div class="header-language" id="en" onclick="exLanguage('en')">EN</div>
+        <div class="header-language" id="zh" onclick="exLanguage('zh')">中文</div>
+      </div>
+    </div>
+
+    <!-- 三个指标 -->
+    <div class="data-details">
+      <div class="details">
+        <label en="Estimated Number of Cells" zh="预测的细胞数" class="d1"></label>
+        <div class="d2">{{cell_report.EstimatedNumberofCell}}</div>
+      </div>
+      <div class="details">
+        <label en="Mean Reads per Cell" zh="每个细胞平均Reads数" class="d1"></label>
+        <div class="d3">{{cell_report.Meanreadspercell}}</div>
+      </div>
+      <div class="details">
+        <label en="Multiplet rate" zh="多细胞占比" class="d1"></label>
+        <div class="d2">{{mix_report.Multipletrate}}</div>
+      </div>
+    </div>
+
+    <!-- cell -->
+    <div class="contents">
+      <div class="content">
+        <div class="content-title">
+          <label en="Cell" zh="细胞"></label>
+          <div class="question" onclick="changeQuestion(this)">?</div>
+        </div>
+        <div class="content-detail">
+          <div class="content-question">
+            <div class="question-main">
+              <!--  -->
+              <label style="font-weight: bold;" zh="条形码UMI分布图：" en="Barcode Rank Plot"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="在建库过程中，来自同一细胞的不同mRNA会带有相同的细胞条形码序列和随机的UMI序列，但由于建库过程中无法避免一些死细胞所释放到背景环境中的mRNA混入反映体系中。该图展示了每个细胞条形码中UMI数的分布，通过含有UMI数或者它们的表达丰度的分布可以来确定该条形码是否与细胞有关。因此，图形中包含了与细胞相关的条形码（彩色区域）和与背景相关的条形码（灰色区域）。"
+				en='In the library preparation, each droplet contains a cell and a bead with primers for reverse transcription, where all primers on a single bead contain a cell barcode that is unique to that bead. An empty droplet does not contain a cell but will still contain "ambient" RNAs. In this plot, cell barcodes are ranked by unique molecular identifier (UMI) counts or expression profiles. This algorithm isto distinguish libraries for real cells from empty droplets. Therefore, the graph contains both cell-associated (Colored Regions) and background-associated barcodes (Gray Regions).'></label>
+              </div>
+
+              <!-- raw -->
+              <label style="font-weight: bold;" zh="预测的细胞数：" en="Estimated Number of Cells"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="与细胞相关的条形码数，理论上一个细胞条形码代表一个细胞。" en="Number of cell-associated barcodes. In theory, a cell barcode represents a cell."></label>
+              </div>
+              <!-- sampleA -->
+              <label style="font-weight: bold;" zh="预测的{{cell_report.sampleA.name}}细胞数：" en="Estimated Number of {{cell_report.sampleA.name}} Cells"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="与{{cell_report.sampleA.name}}参考基因组相关的细胞条形码数。" en="Number of {{cell_report.sampleA.name}} cell-associated barcodes."></label>
+              </div>
+              <!-- sampleB -->
+              <label style="font-weight: bold;" zh="预测的{{cell_report.sampleB.name}}细胞数：" en="Estimated Number of {{cell_report.sampleB.name}} Cells"></label><br />
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="与{{cell_report.sampleB.name}}参考基因组相关的细胞条形码数。" en="Number of {{cell_report.sampleB.name}} cell-associated barcodes."></label>
+              </div>
+
+              <!-- raw -->
+              <label style="font-weight: bold;" zh="细胞中的Reads占比：" en="Fraction Reads in Cells:"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有细胞相关条形码的reads数占比。该项反映了所获得的数据背景污染好坏程度，数值越大，则背景部分的reads含量越低。" en="The percentage of reads with cell-associated barcodes. This item refers to the degree of background contamination, the higher value, the lower background-associated barcodes."></label>
+              </div>
+              <!-- sampleA -->
+              <label style="font-weight: bold;" zh="{{cell_report.sampleA.name}}细胞中的Reads占比：" en="Fraction Reads in {{cell_report.sampleA.name}} Cells:"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有{{cell_report.sampleA.name}}细胞相关条形码的reads数占比。" en="The percentage of reads with {{cell_report.sampleA.name}} cell-associated barcodes."></label>
+              </div>
+              <!-- sampleB -->
+              <label style="font-weight: bold;" zh="{{cell_report.sampleB.name}}细胞中的Reads占比：" en="Fraction Reads in {{cell_report.sampleB.name}} Cells:"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有{{cell_report.sampleB.name}}细胞相关条形码的reads数占比。" en="The percentage of reads with {{cell_report.sampleB.name}} cell-associated barcodes."></label>
+              </div>
+              
+              <!-- raw -->
+              <label style="font-weight: bold;" zh="每个细胞平均Reads数：" en="Mean Reads per Cell:"></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有细胞相关条形码的平均reads数。" en="The mean number of reads detected per cell-associated barcode."></label>
+              </div>
+              <!-- sampleA -->
+              <label style="font-weight: bold;" zh="每个{{cell_report.sampleA.name}}细胞平均Reads数：" en="Mean Reads per {{cell_report.sampleA.name}} Cell: "></label><br/>
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有{{cell_report.sampleA.name}}细胞相关条形码的平均reads数。" en="The mean number of reads detected per {{cell_report.sampleA.name}} cell-associated barcode."></label>
+              </div>
+              <!-- sampleB -->
+              <label style="font-weight: bold;" zh="每个{{cell_report.sampleB.name}}细胞平均Reads数：" en="Mean Reads per {{cell_report.sampleB.name}} Cell: "></label><br />
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有{{cell_report.sampleB.name}}细胞相关条形码的平均reads数。" en="The mean number of reads detected per {{cell_report.sampleB.name}} cell-associated barcode."></label>
+              </div>
+
+              <!-- sampleA -->
+              <label style="font-weight: bold;" zh="每个{{cell_report.sampleA.name}}细胞UMI中位数：" en="Median UMI Counts per {{cell_report.sampleA.name}} Cell"></label><br />
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有预测为{{cell_report.sampleA.name}}细胞相关的条形码中的UMI分布中位数。" en="The median number of UMI counts per {{cell_report.sampleA.name}} cell-associated barcode."></label>
+              </div>          
+              <!-- sampleB -->
+              <label style="font-weight: bold;" zh="每个{{cell_report.sampleB.name}}细胞UMI中位数：" en="Median UMI Counts per {{cell_report.sampleB.name}} Cell"></label><br />
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有预测为{{cell_report.sampleB.name}}细胞相关的条形码中的UMI分布中位数。" en="The median number of UMI counts per {{cell_report.sampleB.name}} cell-associated barcode."></label>
+              </div>
+
+              <!-- sampleA -->
+              <label style="font-weight: bold;" zh="每个{{cell_report.sampleA.name}}细胞基因中位数：" en="Median Genes per {{cell_report.sampleA.name}} Cell"></label><br />
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有{{cell_report.sampleA.name}}细胞相关条形码的检测基因中位数" en="The median number of genes detected per {{cell_report.sampleA.name}} cell-associated barcode."></label>
+              </div>
+              <!-- sampleB -->
+              <label style="font-weight: bold;" zh="每个{{cell_report.sampleB.name}}细胞基因中位数：" en="Median Genes per {{cell_report.sampleB.name}} Cell"></label><br />
+              <div style="margin: 0 0 10px 30px;">
+                <label zh="带有{{cell_report.sampleB.name}}细胞相关条形码的检测基因中位数"  en="The median number of genes detected per {{cell_report.sampleB.name}} cell-associated barcode."></label>
+              </div>
+
+            </div>
+            <div class="question" onclick="closeQuestion(this)">×</div>
+          </div>
+          <div class="content-chart1">
+            <div id="line_1" style="height: 130%; width: 86%;"></div>
+          </div>
+          <div class="content-data">
+            <div class="data">
+              <label en="Estimated Number of Cells" zh="预测的细胞数"></label>
+              <div class="data-num">{{cell_report.EstimatedNumberofCell}}</div>
+            </div>
+
+            <div class="data">
+              <label en="Estimated Number of {{cell_report.sampleA.name}} Cells" zh="预测{{cell_report.sampleA.name}}的细胞数"></label>
+              <div class="data-num">{{cell_report.sampleA.EstimatedNumberofCell}}</div>
+            </div>
+
+            <div class="data">
+              <label en="Estimated Number of {{cell_report.sampleB.name}} Cells" zh="预测{{cell_report.sampleA.name}}的细胞数"></label>
+              <div class="data-num">{{cell_report.sampleB.EstimatedNumberofCell}}</div>
+            </div>       
+
+            <div class="data">
+              <label en="Fraction Reads in Cells" zh="细胞中的Reads占比"></label>
+              <div class="data-num">{{cell_report.Readsincell}}</div>
+            </div>
+
+            <div class="data">
+              <label en="Fraction Reads in {{cell_report.sampleA.name}} Cells" zh="{{cell_report.sampleA.name}}细胞中的Reads占比"></label>
+              <div class="data-num">{{cell_report.sampleA.Readsincell}}</div>
+            </div>
+
+            <div class="data">
+              <label en="Fraction Reads in {{cell_report.sampleB.name}} Cells" zh="{{cell_report.sampleB.name}}细胞中的Reads占比"></label>
+              <div class="data-num">{{cell_report.sampleB.Readsincell}}</div>
+            </div>
+
+
+            <div class="data">
+              <label en="Mean Reads per Cell" zh="每个细胞平均Reads数"></label>
+              <div class="data-num">{{cell_report.Meanreadspercell}}</div>
+            </div>
+
+            <div class="data">
+              <label en="Mean Reads per {{cell_report.sampleA.name}} Cell" zh="每个{{cell_report.sampleA.name}}细胞平均Reads数"></label>
+              <div class="data-num">{{cell_report.sampleA.Meanreadspercell}}</div>
+            </div>
+
+            <div class="data">
+              <label en="Mean Reads per {{cell_report.sampleB.name}} Cell" zh="每个{{cell_report.sampleB.name}}细胞平均Reads数"></label>
+              <div class="data-num">{{cell_report.sampleB.Meanreadspercell}}</div>
+            </div>
+            <div class="data">
+              <label en=" Median UMI Counts per {{cell_report.sampleA.name}} Cell" zh="每个{{cell_report.sampleA.name}}细胞UMI中位数"></label>
+              <div class="data-num">{{cell_report.sampleA.MedianUMICountsperCell}}</div>
+            </div>
+            <div class="data">
+              <label en=" Median UMI Counts per {{cell_report.sampleB.name}} Cell" zh="每个{{cell_report.sampleB.name}}细胞UMI中位数"></label>
+              <div class="data-num">{{cell_report.sampleB.MedianUMICountsperCell}}</div>
+            </div>
+
+            <div class="data">
+              <label en=" Median Genes per {{cell_report.sampleA.name}} Cell"
+                zh="每个{{cell_report.sampleA.name}}细胞基因中位数"></label>
+              <div class="data-num">{{cell_report.sampleA.MedianGenesperCell}}</div>
+            </div>
+
+            <div class="data">
+              <label en=" Median Genes per {{cell_report.sampleB.name}} Cell"
+                zh="每个{{cell_report.sampleB.name}}细胞基因中位数"></label>
+              <div class="data-num">{{cell_report.sampleB.MedianGenesperCell}}</div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- sequencing-->
+<div style="display: flex;">
+        <div class="content1">
+          <div class="content-title">
+            <label en="Mapping" zh="比对"></label>
+            <div class="question" onclick="changeQuestion(this)">?</div>
+          </div>
+          <div class="content-detail">
+            <div class="content-question">
+              <div class="question-main">
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上基因组的Reads数："
+                  en="Reads Mapped Confidently to Genome:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在质控后的reads中，能成功比对上基因组且对比质量大于20的reads占比百分数。"
+                    en="The percentage of reads mapped to a unique genome with a mapping quality of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}基因组的Reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Genome:"></label><br />
+                <div style="margin: 0 0 10px 30px;"><label
+                    zh="本项反映了在质控后的reads中，能成功比对上{{annotated_report.sampleA.name}}基因组且对比质量大于20的reads占比百分数。"
+                    en="The percentage of reads mapped to a unique {{annotated_report.sampleA.name}} genome with a mapping quality of 20 or higher."></label><br />
+                </div>
+                <!-- sampleB -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleBname}}基因组的Reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Genome:"></label><br />
+                <div style="margin: 0 0 10px 30px;"><label
+                    zh="本项反映了在质控后的reads中，能成功比对上{{annotated_report.sampleA.name}}基因组且对比质量大于20的reads占比百分数。"
+                    en="The percentage of reads mapped to a unique {{annotated_report.sampleB.name}} genome with a mapping quality of 20 or higher."></label><br />
+                </div>
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上基因的Reads数："
+                  en="Reads Mapped Confidently to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上基因的reads占比百分数。"
+                    en="The percentage of reads mapped to a reference genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <label style="font-weight: bold;" zh="比对{{annotated_report.sampleA.name}}上基因的Reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上基因的reads占比百分数。"
+                    en="The percentage of reads mapped to a {{annotated_report.sampleA.name}} reference genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleB -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}基因组的Reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上基因的reads占比百分数。"
+                    en="The percentage of reads mapped to a {{annotated_report.sampleB.name}} reference genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上外显子区的reads数："
+                  en="Reads Mapped Confidently to Exonic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the exonic regions of the genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}外显子区的reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Exonic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the exonic regions of the {{annotated_report.sampleA.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleB -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}外显子区的reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Exonic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the exonic regions of the {{annotated_report.sampleB.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上内含子区的reads数："
+                  en="Reads Mapped Confidently to Intronic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the intron regions of the genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}内含子区的reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Intron Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the intron regions of the {{annotated_report.sampleA.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleB -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}内含子区的reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Intron Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the intron regions of the {{annotated_report.sampleB.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上基因反义链的Reads数："
+                  en="Reads Mapped Antisense to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
+                    en="The percentage of reads mapped antisense to genes."></label>
+                </div>
+                <!-- sampleA -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}基因反义链的Reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Antisense to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label
+                    zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
+                    en="The percentage of {{annotated_report.sampleA.name}} reads mapped antisense to genes."></label>
+                </div>
+                <!-- sampleB -->
+                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}基因反义链的Reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Antisense to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label
+                    zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
+                    en="The percentage of {{annotated_report.sampleB.name}} reads mapped antisense to genes."></label>
+                </div>
+              </div>
+              <div class="question" onclick="closeQuestion(this)">×</div>
+            </div>
+            <div class="content-data1">
+              <div class="data">
+                <label en="Reads Mapped Confidently to Genome" zh="比对上基因组的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoGenome}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Genome"
+                  zh="比对上{{annotated_report.sampleA.name}}基因组的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoGenome}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Genome"
+                  zh="比对上{{annotated_report.sampleB.name}}基因组的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoGenome}}</div>
+              </div>
+
+              <div class="data">
+                <label en="Reads Mapped Confidently to Gene" zh="比对上基因的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoGene}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Gene"
+                  zh="比对上{{annotated_report.sampleA.name}}基因的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoGene}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Gene"
+                  zh="比对上{{annotated_report.sampleA.name}}基因的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoGene}}</div>
+              </div>
+
+              <div class="data">
+                <label en="Reads Mapped Confidently to Exonic Regions" zh="比对上外显子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoExonicRegions}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Exonic Regions"
+                  zh="比对上{{annotated_report.sampleA.name}}外显子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoExonicRegions}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Exonic Regions"
+                  zh="比对上{{annotated_report.sampleB.name}}外显子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoExonicRegions}}</div>
+              </div>
+
+              <div class="data">
+                <label en="Reads Mapped Confidently to Intronic Regions" zh="比对上内含子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoIntronicRegions}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Intronic Regions"
+                  zh="比对上{{annotated_report.sampleA.name}}内含子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoIntronicRegions}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Intronic Regions"
+                  zh="比对上{{annotated_report.sampleB.name}}内含子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoIntronicRegions}}</div>
+              </div>
+
+              <div class="data">
+                <label en="Reads Mapped Antisense to Gene" zh="比对上基因反义链的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedAntisensetoGene}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Antisense to Gene"
+                  zh="比对上{{annotated_report.sampleA.name}}基因反义链的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedAntisensetoGene}}</div>
+              </div>
+
+              <div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Antisense to Gene"
+                  zh="比对上{{annotated_report.sampleB.name}}基因反义链的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedAntisensetoGene}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  <div class="content1">
+    <div class="content-title">
+      <label en="Mixing" zh="混合"></label>
+      <div class="question" onclick="changeQuestion(this)">?</div>
+    </div>
+    <div class="content-detail" style="height: 90%; width: 100%;">      
+      <div class="content-question">
+        <div class="question-main">
+            <!--  -->
+            <label style="font-weight: bold;" zh="细胞>0的细胞标签数" en="Cell Barcodes with >0 Cells"></label>
+            <div style="margin: 0 0 10px 30px;">
+              <label zh="与至少一个细胞相关的细胞条形码数。" en="Number of barcodes associated with at least one cell."></label>
+            </div>
+            <!--  -->
+            <label style="font-weight: bold;" zh="细胞>1的细胞标签数" en="Cell Barcodes with >1 Cells"></label>
+            <div style="margin: 0 0 10px 30px;">
+              <label zh="推断与多个细胞相关的细胞条形码数。" en="The infered number of barcodes that associated with multiple cells."></label>
+            </div>
+            <!--  -->
+            <label style="font-weight: bold;" zh="多细胞占比" en="Multiplet Rate"></label>
+            <div style="margin: 0 0 10px 30px;">
+              <label zh="推断与多个细胞相关的细胞条形码占比。" en="The percentage of barcodes associated with multiple cells."></label>
+            </div>
+            <label style="font-weight: bold;" zh="Plot of mixutres" en="Plot of mixutres"></label><br />
+            <div style="margin: 0 0 10px 30px;">
+              <label
+                zh="散点图中每个点代表着一个细胞相关的标签，坐标值分别代表每个细胞比对上{{vln.Samples[0]}}或 {{vln.Samples[1]}}参考基因组的UMI总数。点的颜色代表推测出的细胞类型，其中multiplet代表有多个细胞带有同个细胞标签。"
+                en="In the scatter, each point represents a cell-associated barcode and two-dimensional horizontal and vertical coordinates of each dot represent the total number of umi mapped to GRCh38 or mm10, respectively. Each dot is colored according to the inferred cell type, where multiplet represents the same cell barcode shared by multiple cells."></label><br />
+            </div>
+        </div>
+        <div class="question" onclick="closeQuestion(this)">×</div>
+      </div>
+      <div class="content-chart4" style="margin: 10 auto;">
+        <div id="id-div-mix-data" style="width: 95%; padding: 0 20px;">
+                  <!-- mix指标 -->
+                <div class="data">
+                  <label en="Cell Barcodes with >0 Cells" zh="细胞>0的细胞标签数"></label>
+                  <div class="data-num">{{mix_report.Singlecell}}</div>
+                </div>
+                <div class="data">
+                  <label en="Cell Barcodes with >1 Cells" zh="细胞>1的细胞标签数"></label>
+                  <div class="data-num">{{mix_report.MixCells}}</div>
+                </div>
+                <div class="data">
+                  <label en="Multiplet Rate" zh="多细胞占比"></label>
+                  <div class="data-num">{{mix_report.Multipletrate}}</div>
+                </div>
+          </div>
+        <div id="id-mix-plot" style="height: 80%; width: 100%; margin: 0 auto; padding: 0 20px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- 比对 -->
+    <div style="display: flex;">
+  <div class="content1">
+    <div class="content-title">
+      <label en="Sequencing" zh="测序"></label>
+      <div class="question" onclick="changeQuestion(this)">?</div>
+    </div>
+    <div class="content-detail">
+      <div class="content-question">
+        <div class="question-main">
+          <label style="font-weight: bold;" zh="Reads数：" en="Number of Reads:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="该项反映本次测序方案所得到的原始下机reads数量。"
+              en="Single-end or paired-end reads generated by sequencing platforms."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="通过QC的Reads数：" en="Reads Pass QC:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="通过质控后的reads数，质控包括：过滤低质量的reads以及过滤无效条形码的reads。本项反映能用于后续分析的reads数量。"
+              en="The subset of reads that pass the quality score cutoffs. Cell barcodes are mapped to a pre-defined whitelist. Reads with more than 1 mismatch of cell barcode are excluded."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="有效条形码Reads数：" en="Reads with Valid Barcodes:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="具有与条形码列表一致的有效条形码的reads数。"
+              en="Reads with cell barcodes mapped to predefined whitelist."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="无效条形码Reads数：" en="Filtered Reads with Failed Barcodes:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="未能成功匹配条形码列表的Reads数。" en="Reads with more than 1 mismatch of cell barcode."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="低质量Reads数：" en="Filtered Reads with Low Quality:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="质控会过滤平均测序质量 < Q20或者前15个碱基中有2个碱基 < Q10的reads。该项反映了未能通过质控的低质量reads数。"
+              en="Reads with average bases quality score below 20 or with at least two bases have quality score  below 10 for bases 1-15."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="未知样本条形码的Reads数："
+            en="Filtered Reads with Unknown Sample Barcodes:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="当多个样品进行建库测序时，通常引入样品barcodes以进行数据拆分，质控过程需对因测序错误或其他原因产生的带有未知样本条形码的reads进行过滤。该项指过滤的未知样本条形码的reads数量。"
+              en="Reads with sample barcodes failed to map user-defined whitelist."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="细胞条形码Q30比例：" en="Q30 Bases in Cell Barcode:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="细胞条形码平均碱基质量值≥30的reads占比。"
+              en="The percentage of bases with a quality score of 30 or higher in the cell barcode sequences."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="样本条形码Q30比例：" en="Q30 Bases in Sample Barcode:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="样本条形码平均碱基质量值≥30的reads占比。"
+              en="The percentage of bases with a quality score of 30 or higher in sample barcode sequences."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="UMI中Q30比例：" en="Q30 Bases in UMI:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="UMI平均碱基质量值≥30的reads占比。"
+              en="The percentage of bases with a quality score of 30 or higher in UMI."></label><br />
+          </div>
+          <label style="font-weight: bold;" zh="RNA Read中Q30比例：" en="Q30 Bases in RNA Read:"></label><br />
+          <div style="margin: 0 0 10px 30px;">
+            <label zh="RNA序列平均碱基质量值≥30的reads占总reads的百分比。"
+              en="The percentage of reads with average base quality score of 30 or higher."></label>
+          </div>
+        </div>
+        <div class="question" onclick="closeQuestion(this)">×</div>
+      </div>
+      <div class="content-data1">
+        <div class="data">
+          <label en="Number of Reads" zh="Reads数"></label>
+          <div class="data-num">{{sequencing_report.NumberofFragments}}</div>
+        </div>
+        <div class="data">
+          <label en="Reads Pass QC" zh="通过QC的Reads数"></label>
+          <div class="data-num">{{sequencing_report.FragmentspassQC}}</div>
+        </div>
+        <div class="data">
+          <label en="Reads with Valid Barcodes" zh="有效条形码Reads数"></label>
+          <div class="data-num">{{sequencing_report.FragmentswithExactlyMatchedBarcodes}}</div>
+        </div>
+        <div class="data">
+          <label en="Filtered Reads with Failed Barcodes" zh="无效条形码Reads数"></label>
+          <div class="data-num">{{sequencing_report.FragmentswithFailedBarcodes}}</div>
+        </div>
+        <div class="data">
+          <label en="Filtered Reads with Low Quality" zh="低质量Reads数"></label>
+          <div class="data-num">{{sequencing_report.FragmentsFilteredonLowQulity}}</div>
+        </div>
+        <!-- </div>
+        <div class="content-data"> -->
+        <div class="data">
+          <label en="Filtered Reads with Unknown Sample Barcodes" zh="未知样本条形码的Reads数"></label>
+          <div class="data-num">{{sequencing_report.FragmentsFilteredonUnknownSampleBarcodes}}</div>
+        </div>
+        <div class="data">
+          <label en="Q30 Bases in Cell Barcode" zh="细胞条形码Q30比例"></label>
+          <div class="data-num">{{sequencing_report.Q30basesinCellBarcode}}</div>
+        </div>
+        <div class="data">
+          <label en="Q30 Bases in Sample Barcode" zh="样本条形码Q30比例"></label>
+          <div class="data-num">{{sequencing_report.Q30basesinSampleBarcode}}</div>
+        </div>
+        <div class="data">
+          <label en="Q30 Bases in UMI" zh="UMI中Q30比例"></label>
+          <div class="data-num">{{sequencing_report.Q30basesinUMI}}</div>
+        </div>
+        <div class="data">
+          <label en="Q30 Bases in RNA Read" zh="RNA Read中Q30比例"></label>
+          <div class="data-num"> {{sequencing_report.Q30basesinReads}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- sample -->
+      <div class="content1">
+        <div class="content-title">
+          <label en="Sample" zh="样本"></label>
+        </div>
+        <div class="content-detail">
+          <div class="content-data1">
+            <div class="data">
+              <label en="Name" zh="名字"></label>
+              <div class="data-num">{{sample.Name}}</div>
+            </div>
+            <div class="data">
+              <label en="Original" zh="来源"></label>
+              <div class="data-num">{{sample.Original}}</div>
+            </div>
+            <div class="data">
+              <label en="Species" zh="物种"></label>
+              <div class="data-num">{{sample.Species}}</div>
+            </div>
+            <div class="data">
+              <label en="Sampling Time" zh="采样时间"></label>
+              <div class="data-num">{{sample.Samplingtime}}</div>
+            </div>
+            <div class="data">
+              <label en="Experimental Time" zh="实验时间"></label>
+              <div class="data-num">{{sample.Experimentaltime}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- 数据分布 -->
+    <div class="content">
+      <div class="content-title">
+        <label en="Data Distribution" zh="数据分布"></label>
+        <div class="question" onclick="changeQuestion(this)">?</div>
+      </div>
+      <div class="content-detail">
+        <div class="content-question">
+          <div class="question-main">
+            <label zh="以下三个箱型图中分布代表在预测为{{vln.Samples[0]}}或{{vln.Samples[1]}}细胞的条形码中，每个条形码中所含的Reads、UMI以及Gene的数目分布情况。该项更直观的反映了细胞中reads，UMI，gene分布情况。" en="The following three box plots represents the distribution of the number of Reads, UMI, and Genes in each {{vln.Samples[0]}} or {{vln.Samples[1]}} cell-associated barcode. This item more intuitively reflects the distribution of reads, UMI and genes in cells."></label>
+          </div>
+          <div class="question" onclick="closeQuestion(this)">×</div>
+        </div>
+        <div class="content-chart2">
+          <div id="boxplot_1" style="height: 400px;"></div>
+        </div>
+        <div class="content-chart2">
+          <div id="boxplot_2" style="height: 400px;"></div>
+        </div>
+        <div class="content-chart2">
+          <div id="boxplot_3" style="height: 400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    Copyright©2019&nbsp;&nbsp;华大智造版权所有
+  </div>
+  <script type="text/javascript" charset="utf-8">
+    {{static.js}}
+  </script>
+  <script type="text/javascript" charset="utf-8">
+    $(function() {
+      $(".content-question").hide();
+      
+      $("#main").show();
+      exLanguage("en");
+    });
+
+    var exLanguage = function(lang) {
+      $("label").empty().append(function() {
+        return $(this).attr(lang);
+      })
+      $(".header-language").removeClass("language-active");
+      if(lang == "en") {
+        $("#en").addClass("language-active");
+        line_1_option.xAxis.name = 'Barcodes';
+        line_1_option.yAxis.name = 'UMI counts';
+
+      } else {
+        $("#zh").addClass("language-active");
+        line_1_option.xAxis.name = '条形码数';
+        line_1_option.yAxis.name = 'UMI 数';
+      }
+
+      echarts.init($("#boxplot_1")[0]).setOption(boxplot_1_option, true);
+      echarts.init($("#boxplot_2")[0]).setOption(boxplot_2_option, true);
+      echarts.init($("#boxplot_3")[0]).setOption(boxplot_3_option, true);
+
+      // 初始化echart
+      echarts.init($("#line_1")[0]).setOption(line_1_option, true);
+      echarts.init($("#id-mix-plot")[0]).setOption(mix_plot_option, true);
+
+    }
+    
+    var mix_plot_option = {
+        legend: {
+          orient: 'vertical',
+          right: "5%",
+          top: "12%"
+        },
+        toolbox: {
+          right: 15,
+          show: true,
+          feature: {
+            dataZoom: {},
+            restore: {},
+            saveAsImage: {}
+        }
+      },
+       xAxis: {
+         scale: true
+       },
+       yAxis: {
+         scale: true
+       },
+       series: [
+       {
+         name: "Mix",
+         type: "scatter",
+         data: {{vln.mix.mix}},
+         itemStyle: {
+           color: "gray",
+         }
+       },
+      {
+        name: "{{vln.Samples[0]}}",
+        type: "scatter",
+        data: {{ vln.mix.sampleA }}
+      },
+      {
+        name: "{{vln.Samples[1]}}",
+        type: "scatter",
+          data: {{ vln.mix.sampleB }}
+      },
+
+      ]
+    }
+
+    // 折线图
+    var line_1_option = {
+        grid: {
+          x: 80,
+          x2: 50,
+          y: 40,
+          y2: 50
+        },
+        toolbox: {
+          right: 15,
+          show: true,
+          feature: {
+            dataZoom: {},
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        yAxis: {
+          type: 'log',
+          name: 'UMI counts',
+          nameLocation: 'middle',
+          nameGap: 50
+        },
+        xAxis: {
+          type: 'log',
+          name: 'Barcodes',
+          nameLocation: 'middle',
+          nameGap: 30
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'line',
+            label: {
+              show: true,
+              precision: 0
+            }
+          },
+          formatter: function (params) {
+            return params[0].marker+' ' + params[0].seriesName + ': ' + params[0].data[0] + ', ' + params[0].data[1];
+          }
+        },
+        legend: {
+          data: ['cell', 'background']
+        },
+        color: ["slateblue", "#bbb", "#bbb"],
+        series: [{
+            name: 'cell',
+            type: 'line',
+            showSymbol: false,
+            smooth: true,
+            data: [
+                {% for n in cutoffMap["true"] %}
+                [{{n.barcodes}}, {{n.UMI}}],
+                {% endfor %}
+            ]
+          }, {
+            name: 'background',
+            type: 'line',
+            showSymbol: false,
+            smooth: true,
+            data: [
+            {% for n in cutoffMap["noise"] %}
+                [{{n.barcodes}}, {{n.UMI}}],
+            {% endfor %}
+            ]
+          }, {
+            name: 'link',
+            type: 'line',
+            symbol: 'none',
+            smooth: true,
+            data: [
+
+            ]
+          }]
+      };
+
+
+      // 盒须图
+      var boxplot_1_data = echarts.dataTool.prepareBoxplotData(
+          {{ vln.Raw }}
+      );
+        var boxplot_1_option = {
+          title: {
+            text: "Read Counts",
+            x: 'center',
+            align: 'right'
+          },
+          grid: {
+            x: 60,
+            x2: 40
+          },
+          tooltip: {
+            trigger: 'item',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: {{vln.Samples}}
+          },
+          yAxis: {
+            type: 'value',
+            splitArea: {
+              show: true
+            }
+          },
+          series: [{
+            name: 'boxplot',
+            type: 'boxplot',
+            data: boxplot_1_data.boxData,
+            boxWidth: [7, 30],
+          },
+          {
+            name: 'outlier',
+            type: 'scatter',
+            data: boxplot_1_data.outliers,
+            symbolSize: 4
+          }
+          ]
+        };
+
+        var boxplot_2_data = echarts.dataTool.prepareBoxplotData(
+          {{ vln.UMI }}
+    );
+        var boxplot_2_option = {
+          title: {
+            text: "UMI Counts",
+            x: 'center',
+            align: 'right'
+          },
+          grid: {
+            x: 60,
+            x2: 40
+          },
+          tooltip: {
+            trigger: 'item',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: {{vln.Samples}},
+          },
+          yAxis: {
+            type: 'value',
+            splitArea: {
+              show: true
+            }
+          },
+          series: [{
+            name: 'boxplot',
+            type: 'boxplot',
+            data: boxplot_2_data.boxData,
+            boxWidth: [7, 30],
+          },
+          {
+            name: 'outlier',
+            type: 'scatter',
+            data: boxplot_2_data.outliers,
+            symbolSize: 4
+          }
+          ]
+        };
+
+        var boxplot_3_data = echarts.dataTool.prepareBoxplotData(
+          {{ vln.Gene }}
+    );
+        var boxplot_3_option = {
+          title: {
+            text: "Gene Counts",
+            x: 'center',
+            align: 'right'
+          },
+          grid: {
+            x: 60,
+            x2: 40
+          },
+          tooltip: {
+            trigger: 'item',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          xAxis: {
+            type: 'category',
+            data: {{vln.Samples}},
+          },
+          yAxis: {
+            type: 'value',
+            splitArea: {
+              show: true
+            }
+          },
+          series: [{
+            name: 'boxplot',
+            type: 'boxplot',
+            data: boxplot_3_data.boxData,
+            boxWidth: [7, 30],
+          },
+          {
+            name: 'outlier',
+            type: 'scatter',
+            data: boxplot_3_data.outliers,
+            symbolSize: 4
+          }
+          ]
+        };
+
+      
+      // 显示隐藏提示
+      function changeQuestion(a) {
+        $(a).parent().next().children().first().toggle();
+      }
+      
+      function closeQuestion(a) {
+        $(a).parent().hide();
+      }
+  </script>
+  
+  <style type="text/css">
+      {{ static.css }}
+  </sytle>
+</body>
+
+</html>

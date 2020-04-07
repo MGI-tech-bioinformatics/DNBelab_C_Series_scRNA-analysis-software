@@ -1,0 +1,305 @@
+  .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      padding: 20px 150px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 0 0 #eaeaeb;
+      z-index: 378;
+  }
+
+  .header-menus {
+      display: flex;
+      align-items: center;
+  }
+
+  .header-line {
+      border: solid 1px rgb(229, 229, 229);
+      width: 0px;
+      height: 70px;
+  }
+
+  .header-logo {
+      height: 65px;
+      line-height: 65px;
+      padding: 0 15px 0 0;
+      cursor: pointer;
+  }
+
+  .header-language {
+      height: 28px;
+      line-height: 28px;
+      padding: 0 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-right: 5px;
+  }
+
+  .language-active {
+      background-color: #00a19c;
+      color: rgb(255, 255, 255);
+  }
+
+  .data-details {
+      background-color: #ffffff;
+      padding: 0 20px;
+      display: flex;
+      margin: 20px 150px;
+      text-align: center;
+      position: relative;
+      height: 150px;
+      font-size: 14px;
+  }
+
+  .details {
+      width: 34%;
+      height: 100%;
+  }
+
+  .details+.details {
+      border-left: solid 2px #f5f5f6;
+  }
+
+  .d1 {
+      height: 90px;
+      line-height: 90px;
+      color: rgb(123, 123, 123);
+  }
+
+  .d2 {
+      margin-top: -20px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #005bac;
+  }
+
+  .d3 {
+      margin-top: -20px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #00a19c;
+  }
+
+  .contents {
+      background-color: #ffffff;
+      padding: 0.1px 0;
+      margin: 0 150px 20px;
+  }
+
+  .content {
+      margin: 10px;
+  }
+
+  .content1 {
+      margin: 0 10px;
+      width: 50%;
+  }
+
+  .content-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f6f6f6;
+      border: solid 1px #dddddd;
+      font-weight: bold;
+      font-size: 14px;
+  }
+
+  .question {
+      background-color: #cccccc;
+      color: #ffffff;
+      border-radius: 50%;
+      width: 20px;
+      line-height: 21px;
+      height: 20px;
+      text-align: center;
+      cursor: pointer;
+  }
+
+  .content-detail {
+      display: flex;
+      flex-wrap: wrap;
+      border: solid 1px #dddddd;
+      border-top: none;
+      padding: 10px 0;
+  }
+
+  .content-chart1 {
+      width: 50%;
+  }
+
+  .content-chart2 {
+      width: calc(33.333% - 40px);
+      padding: 0 20px;
+  }
+
+  .content-chart3 {
+      width: 100%;
+      padding: 0 20px;
+  }
+
+  .content-chart4 {
+      width: 100%;
+      height: 90%;
+  }
+
+  .content-data {
+      width: calc(50% - 40px);
+      padding: 0 20px;
+  }
+
+  .content-data1 {
+      width: 100%;
+      padding: 0 20px;
+  }
+
+  .data {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: solid 1px #dddddd;
+      padding: 10px 0;
+  }
+
+  .data-num {
+      color: #005bac;
+  }
+
+  .content-table {
+      padding: 0 10px;
+  }
+
+  .content-table,
+  .content-table table,
+  .content-table tr {
+      width: 100%;
+  }
+
+  .content-table th {
+      text-align: center;
+      padding: 10px;
+      background-color: #f6f6f6;
+      border-top: solid 1px #dddddd;
+      border-bottom: solid 1px #dddddd;
+  }
+
+  .content-table td {
+      text-align: center;
+      padding: 10px;
+      border-bottom: solid 1px #dddddd;
+  }
+
+  .footer {
+      position: relative;
+      background-color: #333333;
+      color: rgb(150, 150, 150);
+      width: 100%;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      z-index: 888;
+  }
+
+  body,
+  ol,
+  ul,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  th,
+  td,
+  dl,
+  dd,
+  form,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  select {
+      margin: 0;
+      padding: 0
+  }
+
+  html,
+  body {
+      font-size: 12px;
+      background: #f5f5f6;
+      -webkit-text-size-adjust: 100%;
+      height: 100%;
+      min-height: 100%;
+  }
+
+  body>.wrap {
+      height: auto;
+      min-height: 100%;
+  }
+
+  a {
+      color: #2d374b;
+      text-decoration: none
+  }
+
+  a:hover {
+      color: #cd0200;
+      text-decoration: underline
+  }
+
+  em {
+      font-style: normal
+  }
+
+  li {
+      list-style: none
+  }
+
+  img {
+      border: 0;
+      vertical-align: middle
+  }
+
+  table {
+      border-collapse: collapse;
+      border-spacing: 0
+  }
+
+  p {
+      word-wrap: break-word
+  }
+
+  .content-question {
+      margin: 0 10px 10px 10px;
+      width: calc(100% - 10px);
+      padding: 5px;
+      border: 1px solid #dddddd;
+      box-shadow: 2px 2px 2px #dddddd;
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .question-main {
+      width: calc(100% - 30px);
+  }
+
+  .iDrop_Report {
+      font-size: 25px;
+      font-weight: bold;
+      line-height: 1.2;
+      margin: 0 10px;
+      z-index: 384;
+      color: #005bac;
+      font-family: "Times New Roman";
+  }
+
+  .iDrop_Report sup {
+      font-size: large;
+  }
