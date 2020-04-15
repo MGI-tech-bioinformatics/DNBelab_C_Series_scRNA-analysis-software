@@ -12,6 +12,7 @@ arg<-matrix(c("input", "i","1","character","Path of input directory",
               "output","o","2","character","Path of output",
               "force","f","1","numeric","Force cells number to analysis. You must set -f or -e to process barcode list.",
               "expect","e","1","numeric","Number of expect cells",
+              "low","l","1","numeric","lower bound on the total UMI count.",
               "help"  ,"h","2","logical",  "This information"),
             byrow=T,ncol=5
             )
@@ -39,9 +40,14 @@ b = log10(sor)
 expect <- 0
 cutoff <- 0
 m <- 0
+low <- 1000
 
 if (!is.null(opt$expect)) {
     expect=as.numeric(opt$expect)
+}
+
+if (!is.null(opt$low)) {
+    low=as.numeric(opt$low)
 }
 
 if (expect >0) {
@@ -60,20 +66,37 @@ if (expect >0) {
    # test=bc[3]
    # colnames(test)="count"
    # test$count=as.numeric(test$count)
-    use=bc[,c(1,3)]
-    rownames(use)=use[,1]
-    use=use[2]
-    test=t(use)
-    br.out <- barcodeRanks(test,lower = 100)
-    o <- order(br.out$rank)
-    cutoff = nrow(subset(bc,bc$UB>=br.out@metadata$knee))
+
+############## knee #########################
+    use.kn=bc[,c(1,3)]
+    rownames(use.kn)=use.kn[,1]
+    use.kn=use.kn[2]
+    test.kn=t(use.kn)
+    br.kn <- barcodeRanks(test.kn,lower = low)
+    o.kn <- order(br.kn$rank)
+    cutoff.kn = nrow(subset(bc,bc$UB>=br.kn@metadata$knee))
     if(cutoff < 10000){
-               m = br.out@metadata$knee
-                      }
+        m.kn = br.kn@metadata$knee
+    }
     else{
-               cutoff=10000
-               m = bc[10000,3]
-        }
+        cutoff.kn=10000
+        m.kn = bc[10000,3]
+    }
+############### inflection #################
+    use.inf=bc[,c(1,3)]
+    rownames(use.inf)=use.inf[,1]
+    use.inf=use.inf[2]
+    test.inf=t(use.inf)
+    br.inf <- barcodeRanks(test.inf,lower = low)
+    o.inf <- order(br.inf$rank)
+    cutoff.inf = nrow(subset(bc,bc$UB>=br.inf@metadata$inflection))
+    if(cutoff.inf < 10000){
+        m.inf = br.inf@metadata$inflection
+    }
+    else{
+        cutoff.inf=10000
+        m.inf = bc[10000,3]
+    }
 }
 
 if (!is.null(opt$force)) {
@@ -87,6 +110,8 @@ if (!is.null(opt$force)) {
 
 
 #print(paste("Estimated Number of Cells:", cutoff))
+cutoff <- round(mean(c(cutoff.kn,cutoff.inf)),digits = 0)
+m <- round(mean(c(m.kn,m.inf)),digits = 0)
 tmp<-data.frame(barcodes=1:len,UMI=sor,cell=c(rep("true",cutoff),rep("noise",len-cutoff)))
 
 cc <- bc[1:cutoff,]
@@ -115,7 +140,7 @@ write.csv(tmp,file=paste(opt$output,"/../report/cutoff.csv",sep=""),row.names=FA
 write.csv(small,file=paste(opt$output,"/../report/vln.csv",sep=""),row.names=FALSE,quote=FALSE)
                                         #png(file=paste(opt$output,"/cell_count_summary.png",sep=""), width=700,height=300,res=100,pointsize=10)
 png(file=paste(opt$output,"/cell_count_summary.png",sep=""), width=1200,height=400,res=80)
-p1 = ggplot(tmp,aes(x=x,y=y)) + xlim(0,10) + ylim(0,9)
+p1 = ggplot(tmp,aes(x=barcodes,y=UMI)) + xlim(0,10) + ylim(0,9)
 p1 = p1 +annotate("text",x=0.2,y=9,label="Estimated Number of Cell:",size=10,hjust=0)
 p1 = p1 +annotate("text",x=3,y=6.5,label=CellNum,size=20,hjust=0, colour="red")
 p1 = p1 +annotate("text",x=0.2,y=3.5,label="Reads in cell:",size=6,hjust=0)
@@ -129,7 +154,7 @@ p1 = p1 +annotate("text",x=9,y=1.5,label=round(Gene_mean),size=6,hjust=1)
 p1 = p1 +annotate("segment",x  = 0, xend  = 10, y  = 1, yend = 1,colour = "blue")
 p1 = p1 +theme(axis.title=element_blank(), axis.text=element_blank(), axis.ticks=element_blank(),panel.background = element_blank(), panel.grid.major=element_blank(),panel.grid.minor = element_blank())
 
-p = ggplot(tmp,aes(x=x,y=y))
+p = ggplot(tmp,aes(x=barcodes,y=UMI))
 p = p + geom_line(aes(color=cell),size=2) +scale_color_manual(values=c("#999999","blue"))
 p = p + scale_x_log10(name="Barcodes",breaks=c(1,10,100,1000,10000,100000),labels=c(1,10,100,"1k","10K","100K"))
 p = p + scale_y_log10(name="UB",breaks=c(1,10,100,1000,10000,100000),labels=c(1,10,100,"1k","10K","100K"))
@@ -148,6 +173,6 @@ p3 <- p3 + theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.t
 p2 <- ggplot(cc) + geom_violin(aes(x=5,y=GN),stat="ydensity") + theme_classic() +geom_jitter(aes(x=5,y=GN),alpha=0.2,color="blue")
 p2 <- p2 + theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
 
-#plot_grid(p1, p, p3,p2, rel_widths = c(4,3,1.5,1.5),ncol=4)
-
+pict <- plot_grid(p1, p, p3,p2, rel_widths = c(4,3,1.5,1.5),ncol=4)
+pict
 dev.off()

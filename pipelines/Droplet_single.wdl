@@ -13,6 +13,7 @@ workflow main {
   String ?lib
   Int ?expectCell
   Int ?forceCell
+  Int ?umilow
   String ?species
   String ?original
   String ?SampleTime
@@ -63,7 +64,8 @@ workflow main {
     outdir=outdir,
     Rscript=Rscript,
     expectCell=expectCell,
-    forceCell=forceCell
+    forceCell=forceCell,
+    umilow=umilow
   }
   call countMatrix {
     input:
@@ -219,6 +221,7 @@ task cellCalling {
   String root
   Int ?expectCell
   Int ?forceCell
+  Int ?umilow
   String ?lib
   Int cpp=1
   command {
@@ -228,7 +231,7 @@ task cellCalling {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell}
+      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=1000 umilow}
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
     fi
   }
@@ -286,7 +289,7 @@ task report {
       echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv
       echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv
       ${Python3} ${root}/scripts/idrop.py single ${outdir}/report iDrop_${ID}
-      echo "rm ${outdir}/temp/*bam ${outdir}/temp/*fq" > ${outdir}/clear.sh
+      echo "rm ${outdir}/temp/*bam ${outdir}/temp/*fq" > ${outdir}/clean.sh
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/report_sigh.txt
     fi
   }

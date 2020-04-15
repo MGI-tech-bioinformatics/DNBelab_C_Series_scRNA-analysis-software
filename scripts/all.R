@@ -12,6 +12,7 @@ arg<-matrix(c("input", "i","1","character","Path of input file",
               "output","o","2","character","Path of output directory",
               "force","f","1","numeric","Force cells number to analysis. You must set -f or -e to process barcode list.",
               "expect","e","1","numeric","Number of expect cells",
+              "low","l","1","numeric","lower bound on the total UMI count.",
               "help"  ,"h","2","logical",  "This information"),
             byrow=T,ncol=5
             )
@@ -39,31 +40,7 @@ b = log10(sor)
 expect <- 0
 cutoff <- 0
 m <- 0
-#lo <- loess(b~a,span = 0.004,degree = 2)
-
-#if (!is.null(opt$expect)) {
-#    expect=as.numeric(opt$expect)
-#    c = log10(expect*1.7)
-#    if(10^c>len){c=log10(expect)}
-#} else {
-#  c=4
-#}
-
-#xl <- seq(2,c, (c - 2)/10)
-#out = predict(lo,xl)
-#infl <- c(FALSE,abs(diff(out)/((c - 2)/10) - -1) == min(abs(diff(out)/((c - 2)/10)- -1)))
-#m = 10 ^ out[infl] + 0.5
-#m = round(m , digits =0 )
-#cutoff<-length(which(sor>=m))
-
-#if (!is.null(opt$force)) {
-#    force = as.numeric(opt$force)
-#    if (force > 0) {
-#        expect = force
-#        cutoff = expect
-#        m = sor[cutoff]
-#    }
-#}
+low <- 1000
 if (!is.null(opt$expect)) {
     expect=as.numeric(opt$expect)
 }
@@ -84,20 +61,37 @@ if (expect >0) {
    # test=bc[3]
    # colnames(test)="count"
    # test$count=as.numeric(test$count)
-    use=bc[,c(1,3)]
-    rownames(use)=use[,1]
-    use=use[2]
-    test=t(use)
-    br.out <- barcodeRanks(test,lower = 100)
-    o <- order(br.out$rank)
-    cutoff = nrow(subset(bc,bc$UB>=br.out@metadata$knee))
+########################### knee ###############################    
+    use.kn=bc[,c(1,3)]
+    rownames(use.kn)=use.kn[,1]
+    use.kn=use.kn[2]
+    test.kn=t(use.kn)
+    br.kn <- barcodeRanks(test.kn,lower = low)
+    o.kn <- order(br.kn$rank)
+    cutoff.kn = nrow(subset(bc,bc$UB>=br.kn@metadata$knee))
     if(cutoff < 10000){
-               m = br.out@metadata$knee
-                      }
+        m.kn = br.kn@metadata$knee
+    }
     else{
-               cutoff=10000
-               m = bc[10000,3]
-        }
+        cutoff.kn=10000
+        m.kn = bc[10000,3]
+    }
+############### inflection #################
+    use.inf=bc[,c(1,3)]
+    rownames(use.inf)=use.inf[,1]
+    use.inf=use.inf[2]
+    test.inf=t(use.inf)
+    br.inf <- barcodeRanks(test.inf,lower = low)
+    o.inf <- order(br.inf$rank)
+    cutoff.inf = nrow(subset(bc,bc$UB>=br.inf@metadata$inflection))
+    if(cutoff.inf < 10000){
+        m.inf = br.inf@metadata$inflection
+    }
+    else{
+        cutoff.inf=10000
+        m.inf = bc[10000,3]
+    }
+
 }
 
 if (!is.null(opt$force)) {
@@ -109,6 +103,8 @@ if (!is.null(opt$force)) {
     }
 }
 
+cutoff <- round(mean(c(cutoff.kn,cutoff.inf)),digits = 0)
+m <- round(mean(c(m.kn,m.inf)),digits = 0)
 tmp<-data.frame(barcodes=1:len,UMI=sor,cell=c(rep("true",cutoff),rep("noise",len-cutoff)))
 cutoff=nrow(bc[which(bc$UB>=m),])
 
@@ -179,7 +175,8 @@ p1 <- ggplot(small, aes(x=Human_UB,y=Mouse_UB,color=Species_UMI)) + geom_point()
 p2 <- ggplot(small.new, aes(y=UB,x=Species_UMI)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("UMI")
 p3 <- ggplot(small.new, aes(y=GN,x=Species_UMI)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("Genes")
 p4 <- ggplot(small.new, aes(y=Raw,x=Species_UMI)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("Raw reads")
-plot_grid(p1, p2, p3,p4, rel_widths = c(4,2,2,2),ncol=4)
+pict1 <- plot_grid(p1, p2, p3,p4, rel_widths = c(4,2,2,2),ncol=4)
+pict1
 dev.off()
 
 png(file=paste(opt$output,"/cell_count_summary.png",sep=""), width=1200,height=400,res=80)
@@ -206,5 +203,6 @@ p3 <- ggplot(cc) + geom_violin(aes(x=5,y=UB),stat="ydensity") + theme_classic() 
 p3 <- p3 + theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
 p2 <- ggplot(cc) + geom_violin(aes(x=5,y=GN),stat="ydensity") + theme_classic() +geom_jitter(aes(x=5,y=GN),alpha=0.2,color="blue")
 p2 <- p2 + theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())
-plot_grid(p1, p, p3,p2, rel_widths = c(4,3,1.5,1.5),ncol=4)
+pict2 <- plot_grid(p1, p, p3,p2, rel_widths = c(4,3,1.5,1.5),ncol=4)
+pict2
 dev.off()
