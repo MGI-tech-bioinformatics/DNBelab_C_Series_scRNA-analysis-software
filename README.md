@@ -143,7 +143,6 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/mm10/gtf/genes.gtf",
     "main.ID": "demo",
-    "main.expectCell": "1500",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/result",
     "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/BGI_Droplet_scRNA_readstruct_v2.json",
     "main.Rscript":"/User/Pub/third_party/Rscript",
@@ -167,14 +166,20 @@ java -jar cromwell-35.jar run -i config.json ../../pipelines/Droplet_single.wdl
 ```
 # After all analysis processes ending, you will get these files below:
 $ cd result && ls
-outs/  report/  temp/   workflowtime.log
+outs/  report/  temp/  /symbol workflowtime.log
 
 $ ls out
 cell_barcodes.txt  cluster.h5ad  count_mtx.tsv.gz  final.bam
 
 $ ls report
 alignment_report.csv  annotated_report.csv  cell_report.csv  cluster.csv  cutoff.csv  iDrop_demo.html  marker.csv  RNA_counts.pdf  sample.csv  sequencing_report.csv  vln.csv
+
+$ ls symbol
+# In single_Species result,there are some follow files will be generated:
+
+makedir_sigh.txt parseFastq_sigh.txt fastq2bam_sigh.txt sortBam_sigh.txt cellCount_sigh.txt cellCalling_sigh.txt countMatrix_sigh.txt report_sigh.txt
 ```
+
 So the final html report is at `outdir Path`/report/iDrop_*.html
 
 ## Example - double_Species
@@ -199,7 +204,6 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/gtf/genes.gtf",
     "main.ID": "demo",
-    "main.expectCell": "1500",
     "main.chrom":"/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/species_binding.txt",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/result",
     "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/BGI_Droplet_scRNA_readstruct_v2.json",
@@ -223,10 +227,15 @@ java -jar cromwell-35.jar run -i config.json ../../pipelines/Droplet_double.wdl
 ```
 # After all analysis processes ending, you will get these files below:
 $ cd result && ls
-outs/  report/  temp/   workflowtime.log
+outs/  report/  temp/  /symbol workflowtime.log
 
 $ ls out
 anno_species.bam
+
+$ ls symbol
+# In double_Species result, there are some follow files willbe generated:
+
+makedir_sigh.txt parseFastq_sigh.txt fastq2bam_sigh.txt sortBam_sigh.txt cellCount_sigh.txt cellCalling_sigh.txt report_sigh.txt
 
 $ ls report
 alignment_report.csv  cell_barcodes.txt cell_report.csv  mix_report.csv sample.csv iDrop_Demo.html annotated_report.csv  cell_count_summary.png  cutoff.csv mixture_cells.png  sequencing_report.csv  vln.csv
@@ -251,6 +260,12 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
    
 4. Can I use this pipeline to analysis 10X Genomes single cell gene expression data ?
 
-   Yes,  the read structure configure file can be found at `config/10X_3end_readstruct.json`. Other steps are same with the 
-demonstration.
+   Yes,  the read structure configure file can be found at `config/10X_3end_readstruct.json`. Other steps are same with the demonstration.
+   
+5. Can I continuse to run the workflow if some errors were happended in the process?
+   Yes,  the result/symbol directory records the symbol for each step, you can delete the lastest symbol.txt file then keep the output path unchanged and run this pipeline after correct the error.
+
+6. Why the inflection point is inaccurate on the total count curve?
+   You can specify "main.umilow" in the configure file like "main.umilow": "1000". "main.umilow" is a numeric scalar specifying the lower bound on the total UMI count, at or below which all barcodes are assumed to correspond to empty droplets, default 1000.
+
 
