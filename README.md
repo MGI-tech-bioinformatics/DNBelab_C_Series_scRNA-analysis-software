@@ -263,9 +263,11 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
    Yes,  the read structure configure file can be found at `config/10X_3end_readstruct.json`. Other steps are same with the demonstration.
    
 5. Can I continuse to run the workflow if some errors were happended in the process?
+
    Yes,  the result/symbol directory records the symbol for each step, you can delete the lastest symbol.txt file then keep the output path unchanged and run this pipeline after correct the error.
 
 6. Why the inflection point is inaccurate on the total count curve?
+
    You can specify "main.umilow" in the configure file like "main.umilow": "1000". "main.umilow" is a numeric scalar specifying the lower bound on the total UMI count, at or below which all barcodes are assumed to correspond to empty droplets, default 1000.
 
 
