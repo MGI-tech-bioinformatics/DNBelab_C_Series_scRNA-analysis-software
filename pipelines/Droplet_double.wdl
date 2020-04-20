@@ -197,14 +197,14 @@ task parseFastq {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/PISA parse -t ${cpp} -f -q 20 -dropN -config ${config} -cbdis ${outdir}/temp/barcode_counts_raw.txt -run ${default=1 runID} -report ${outdir}/report/sequencing_report.csv ${fastq1} ${fastq2}  > ${outdir}/temp/reads.fq
+      ${root}/bin/PISA parse -t ${cpp} -f -q 20 -dropN -config ${config} -cbdis ${outdir}/temp/barcode_counts_raw.txt -run ${default=1 runID} -report ${outdir}/report/sequencing_report.csv ${fastq1} ${fastq2} |gzip -c  > ${outdir}/temp/reads.fq.gz
       head -n 50000 ${outdir}/temp/barcode_counts_raw.txt |cut -f1 > ${outdir}/temp/barcode_raw_list.txt
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/parseFastq_sigh.txt
     fi
   }
   output {
     String count="${outdir}/temp/barcode_counts_raw.txt"
-    String fastq="${outdir}/temp/reads.fq"
+    String fastq="${outdir}/temp/reads.fq.gz"
     String sequencingReport="${outdir}/report/sequencing_report.csv"
     String rawlist="${outdir}/temp/barcode_raw_list.txt"
   }
@@ -223,7 +223,7 @@ task fastq2bam {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/STAR --outSAMmultNmax 1 --outSAMunmapped Within --outStd SAM --runThreadN ${cpp} --genomeDir ${refdir} --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ > aln.sam && \
+      ${root}/bin/STAR --outSAMmultNmax 1 --outSAMunmapped Within --outStd SAM --runThreadN ${cpp} --genomeDir ${refdir} --readFilesCommand gzip -dc --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ > aln.sam && \
       ${root}/bin/PISA sam2bam -k -o ${outdir}/temp/aln.bam -report ${outdir}/report/alignment_report.csv aln.sam && rm -f aln.sam 
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/fastq2bam_sigh.txt
     fi  
