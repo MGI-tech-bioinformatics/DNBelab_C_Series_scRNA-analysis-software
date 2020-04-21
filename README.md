@@ -19,12 +19,6 @@
 
 # Install
 
-## Downlod the lastest binary [release](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software.git) and uncompress it
-```
-$ wget -c https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software.git
-$ tar zxvf scRNA-pipe-demo_v0.1.0_Linux_static.tar.gz
-```
-or you can download with `git` 
 ```
 $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software.git
 ```
