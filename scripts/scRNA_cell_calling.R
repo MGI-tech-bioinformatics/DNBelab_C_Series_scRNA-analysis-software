@@ -40,7 +40,7 @@ b = log10(sor)
 expect <- 0
 cutoff <- 0
 m <- 0
-low <- 1000
+low <- = as.numeric(opt$low)
 
 if (!is.null(opt$expect)) {
     expect=as.numeric(opt$expect)
@@ -75,7 +75,7 @@ if (expect >0) {
     br.kn <- barcodeRanks(test.kn,lower = low)
     o.kn <- order(br.kn$rank)
     cutoff.kn = nrow(subset(bc,bc$UB>=br.kn@metadata$knee))
-    if(cutoff < 10000){
+    if(cutoff.kn < 10000){
         m.kn = br.kn@metadata$knee
     }
     else{
