@@ -38,42 +38,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
   * pandas
   * scanpy(1.4.3+)
   * jinja2(2.10.3+)
-* Tipe: You can use Conda to manage third-party software and create related system environment
-* [Conda](https://anaconda.org/anaconda/conda) # with following anaconda installed
-- Step 1: Create your environment name
-```
-conda create -n <env_name>
-```
-- Step 2: Activate your environment name and download third-party software
-```
-# Activate environment
-source activate <env_name>
 
-# Download R
-conda install -c http://mirror/anaconda/pkgs/r/ r
-
-# Download R packages
-conda install -c https://repo.anaconda.com/pkgs/r/ ggplot2
-conda install -c https://repo.anaconda.com/pkgs/r/ getopt
-conda install -c https://repo.anaconda.com/pkgs/r/ data.table
-conda install -c https://repo.anaconda.com/pkgs/r/ devtools
-
-# Download cowplot package by R
-R
-library('devtools')
-devtools::install_github('wilkelab/cowplot')
-
-# Download Python3 packages by Conda
-conda install numpy
-conda install pandas
-conda install scanpy
-conda install jinja2
-```
-- Step 3: Load the Conda library instead of system library
-```
-echo 'export LD_LIBRARY_PATH="Your_Anaconda3_Path/envs/python37/lib":$LD_LIBRARY_PATH' >> ~/.bash_profile
-source ~/.bash_profile
-```
   
 ## Pre-compiled executables within binary releases
 * [PISA](https://github.com/shiquan/LISA)
