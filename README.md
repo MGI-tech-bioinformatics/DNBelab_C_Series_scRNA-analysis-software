@@ -26,7 +26,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 # Third-party software 
 
 ## Users need to install manually
-* [java](www.java.com)
+* [java](https://www.oracle.com/java/)
 * [Cromwell](https://github.com/broadinstitute/cromwell/releases/download/35/cromwell-35.jar)
 * [R](https://www.r-project.org/)  (3.5+) #  with following R packages installed
   * ggplot2
