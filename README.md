@@ -18,6 +18,10 @@
 - **scripts**    miscellaneous scripts
 
 # Install
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6883c8bc39e8ddb2fb816de7d622883ab31294b0
 ```
 $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software.git
 ```
@@ -25,54 +29,20 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 # Third-party software 
 
 ## Users need to install manually
-* [java](www.java.com)
+* [java](https://www.oracle.com/java/)
 * [Cromwell](https://github.com/broadinstitute/cromwell/releases/download/35/cromwell-35.jar)
 * [R](https://www.r-project.org/)  (3.5+) #  with following R packages installed
   * ggplot2
   * getopt
   * data.table
   * cowplot
+  * DropletUtils
 * [python3](https://www.python.org/downloads/)  (3.6+) #  with following Python3 packages installed
   * numpy
   * pandas
   * scanpy(1.4.3+)
   * jinja2(2.10.3+)
-* Tipe: You can use Conda to manage third-party software and create related system environment
-* [Conda](https://anaconda.org/anaconda/conda) # with following anaconda installed
-- Step 1: Create your environment name
-```
-conda create -n <env_name>
-```
-- Step 2: Activate your environment name and download third-party software
-```
-# Activate environment
-source activate <env_name>
 
-# Download R
-conda install -c http://mirror/anaconda/pkgs/r/ r
-
-# Download R packages
-conda install -c https://repo.anaconda.com/pkgs/r/ ggplot2
-conda install -c https://repo.anaconda.com/pkgs/r/ getopt
-conda install -c https://repo.anaconda.com/pkgs/r/ data.table
-conda install -c https://repo.anaconda.com/pkgs/r/ devtools
-
-# Download cowplot package by R
-R
-library('devtools')
-devtools::install_github('wilkelab/cowplot')
-
-# Download Python3 packages by Conda
-conda install numpy
-conda install pandas
-conda install scanpy
-conda install jinja2
-```
-- Step 3: Load the Conda library instead of system library
-```
-echo 'export LD_LIBRARY_PATH="Your_Anaconda3_Path/envs/python37/lib":$LD_LIBRARY_PATH' >> ~/.bash_profile
-source ~/.bash_profile
-```
   
 ## Pre-compiled executables within binary releases
 * [PISA](https://github.com/shiquan/LISA)
@@ -121,7 +91,7 @@ An input JSON file includes all input parameters and genome reference index dire
 Please refer to [Database](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software#Database)
 
 - Step 1: Prepare fastq
-We provide mouse(mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0196716/CNX0144388/CNR0177383/)
+We provide mouse(mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0196716/CNX0150683/CNR0192173/)
 
 - Step 2: Setup configure file.
 ```
@@ -136,8 +106,9 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/mm10/gtf/genes.gtf",
     "main.ID": "demo",
+    "main.umilow": "1000",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/result",
-    "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/BGI_droplet_scRNA_readStructure.json",
+    "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
     "main.Rscript":"/User/Pub/third_party/Rscript",
     "main.refdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/mm10/star_index",
     "main.Python3": "/User/Pub/third_party/python3",
@@ -197,9 +168,10 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/gtf/genes.gtf",
     "main.ID": "demo",
+    "main.umilow": "1000",
     "main.chrom":"/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/species_binding.txt",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/result",
-    "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/BGI_droplet_scRNA_readStructure.json",
+    "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
     "main.Rscript":"/User/Pub/third_party/Rscript",
     "main.refdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/star_index",
     "main.Python3": "/User/Pub/third_party/python3",
@@ -236,7 +208,7 @@ alignment_report.csv  cell_barcodes.txt cell_report.csv  mix_report.csv sample.c
 So the final html report is at `outdir Path`/report/iDrop_*.html
 
 # License
-[MIT](LICENSE) © Richard Littauer
+[MIT](LICENSE)
 
 # Frequently Asked Questions
 1. Does this pipeline correct UMI errors?
