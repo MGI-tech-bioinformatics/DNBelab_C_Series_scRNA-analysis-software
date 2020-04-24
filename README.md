@@ -18,10 +18,6 @@
 - **scripts**    miscellaneous scripts
 
 # Install
-<<<<<<< HEAD
-=======
-
->>>>>>> 6883c8bc39e8ddb2fb816de7d622883ab31294b0
 ```
 $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software.git
 ```
