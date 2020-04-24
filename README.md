@@ -33,6 +33,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
   * getopt
   * data.table
   * cowplot
+  * DropletUtils
 * [python3](https://www.python.org/downloads/)  (3.6+) #  with following Python3 packages installed
   * numpy
   * pandas
