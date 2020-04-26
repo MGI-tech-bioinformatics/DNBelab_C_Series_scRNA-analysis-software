@@ -97,6 +97,8 @@ if (expect >0) {
         cutoff.inf=10000
         m.inf = bc[10000,3]
     }
+    m <- round(mean(c(m.kn,m.inf)),digits = 0)
+    cutoff<-length(which(sor>=m))
 }
 
 if (!is.null(opt$force)) {
@@ -111,8 +113,6 @@ if (!is.null(opt$force)) {
 
 #print(paste("Estimated Number of Cells:", cutoff))
 #cutoff <- round(mean(c(cutoff.kn,cutoff.inf)),digits = 0)
-m <- round(mean(c(m.kn,m.inf)),digits = 0)
-cutoff<-length(which(sor>=m))
 tmp<-data.frame(barcodes=1:len,UMI=sor,cell=c(rep("true",cutoff),rep("noise",len-cutoff)))
 
 cc <- bc[1:cutoff,]
