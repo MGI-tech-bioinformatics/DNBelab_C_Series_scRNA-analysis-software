@@ -40,9 +40,13 @@ b = log10(sor)
 expect <- 0
 cutoff <- 0
 m <- 0
-low = as.numeric(opt$low)
+low = 50
 if (!is.null(opt$expect)) {
     expect=as.numeric(opt$expect)
+}
+
+if (!is.null(opt$low)) {
+    low=as.numeric(opt$low)
 }
 
 if (expect >0) {
