@@ -14,7 +14,7 @@ We provide two example JSON files including [single-species](https://github.com/
 | `main.fastq2` 	| Fastq   	| MANDATORY. Read 2 in fastq format. Can be gzipped. Fastqs from different lanes can be seperated with comma. For example, "L01_read_2.fq.gz,L02_read_2.fq.gz,..."|
 | `main.outdir`	 	| Directory | MANDATORY. Output directory               |
 | `main.root`   	| Directory | MANDATORY. Directory of this pipeline.               |
-| `main.expectCell` | Integer 	| Optional, default: 50. Expected cell number.               |
+| `main.expectCell` | Integer 	| Optional, default: 0. Expected cell number.               |
 | `main.umilow` | Integer 	| Optional, default: 50. Expected UMIs count per cell threshold.               |
 | `main.config` 	| JSON file | MANDATORY. Read structure configure. UMI and Cell Barcode specified in this file. Can be found at `config/` directory.              |
 | `main.Rscript` 	| Path 		| MANDATORY. Path to Rscript.               |
