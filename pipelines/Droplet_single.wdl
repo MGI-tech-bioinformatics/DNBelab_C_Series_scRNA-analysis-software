@@ -231,7 +231,7 @@ task cellCalling {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=1000 umilow}
+      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=100 umilow}
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
     fi
   }

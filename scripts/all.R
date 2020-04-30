@@ -61,38 +61,18 @@ if (expect >0) {
    # test=bc[3]
    # colnames(test)="count"
    # test$count=as.numeric(test$count)
-########################### knee ###############################    
-    use.kn=bc[,c(1,3)]
-    rownames(use.kn)=use.kn[,1]
-    use.kn=use.kn[2]
-    test.kn=t(use.kn)
-    br.kn <- barcodeRanks(test.kn,lower = low)
-    o.kn <- order(br.kn$rank)
-    cutoff.kn = nrow(subset(bc,bc$UB>=br.kn@metadata$knee))
-    if(cutoff.kn < 10000){
-        m.kn = br.kn@metadata$knee
-    }
-    else{
-        cutoff.kn=10000
-        m.kn = bc[10000,3]
-    }
-############### inflection #################
-    use.inf=bc[,c(1,3)]
-    rownames(use.inf)=use.inf[,1]
-    use.inf=use.inf[2]
-    test.inf=t(use.inf)
-    br.inf <- barcodeRanks(test.inf,lower = low)
-    o.inf <- order(br.inf$rank)
-    cutoff.inf = nrow(subset(bc,bc$UB>=br.inf@metadata$inflection))
-    if(cutoff.inf < 10000){
-        m.inf = br.inf@metadata$inflection
-    }
-    else{
-        cutoff.inf=10000
-        m.inf = bc[10000,3]
-    }
-    m <- round(mean(c(m.kn,m.inf)),digits = 0)
+    use=bc[,c(1,3)]
+    rownames(use)=use[,1]
+    use=use[2]
+    test=t(use)
+    br <- barcodeRanks(test,lower = low)
+    o <- order(br$rank)
+    m <- br@metadata$inflection
     cutoff<-length(which(sor>=m))
+    if(cutoff >= 10000){
+        cutoff=10000
+        m = bc[10000,3]
+    }
 }
 
 if (!is.null(opt$force)) {
@@ -104,7 +84,6 @@ if (!is.null(opt$force)) {
     }
 }
 
-#cutoff <- round(mean(c(cutoff.kn,cutoff.inf)),digits = 0)
 tmp<-data.frame(barcodes=1:len,UMI=sor,cell=c(rep("true",cutoff),rep("noise",len-cutoff)))
 cutoff=nrow(bc[which(bc$UB>=m),])
 

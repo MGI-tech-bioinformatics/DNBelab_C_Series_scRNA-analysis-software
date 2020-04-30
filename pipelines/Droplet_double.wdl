@@ -132,7 +132,7 @@ task cellCalling {
       sed -i '1d' ${outdir}/temp/tmp_id.txt
       ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -list ${outdir}/temp/tmp_id.txt -group SP -dedup -o ${outdir}/temp/cell_counts_tmp.tsv -@ ${cpp} ${bam}
       paste ${count} ${outdir}/temp/cell_counts_tmp.tsv |awk '{print$1"\t"$2"\t"$3"\t"$4"\t"$7"\t"$8"\t"$9"\t"$10}' > ${outdir}/temp/cell_counts_all.tsv
-      ${Rscript} ${root}/scripts/all.R -i ${outdir}/temp/cell_counts_all.tsv -o ${outdir}/report -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=1000 umilow}
+      ${Rscript} ${root}/scripts/all.R -i ${outdir}/temp/cell_counts_all.tsv -o ${outdir}/report -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=100 umilow}
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
     fi
   >>>
