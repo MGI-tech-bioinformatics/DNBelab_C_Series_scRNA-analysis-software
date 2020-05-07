@@ -82,9 +82,71 @@ An input JSON file includes all input parameters and genome reference index dire
 
 ## Example - single_Species
 
+We provide human(GRCh38) pairs sequencing fastq about 4K PBMCs and mus musculus 3T3 cell lines sample for downloading.
+
 - Step 0: Build reference index
 
 Please refer to [Database](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software#Database)
+
+## 4k PBMCs
+
+- Step 1: Prepare fastq
+There are 4k PBMCs samples that were sequenced on the MGISEQ-2000. The raw data can be found [here].(http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0223751/CNX0181011/)
+
+- Step 2: Setup configure file.
+```
+# Goto test directory
+cd ./example/single_Species
+
+# Check configure file
+$ cat config.json
+  {
+    "main.fastq1": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/DP8400008965TL_L01_3_1.fq.gz,/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/DP8400009112TL_L01_3_1.fq.gz,/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/DP8400009113TL_L01_3_1.fq.gz",
+    "main.fastq2": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/DP8400008965TL_L01_3_2.fq.gz,/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/DP8400009112TL_L01_3_2.fq.gz,/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/DP8400009113TL_L01_3_2.fq.gz",
+    "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
+    "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/database/GRCh38/gtf/genes.gtf",
+    "main.ID": "demo",
+    "main.expectCell": "0",
+    "main.umilow": "50",
+    "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/result",
+    "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
+    "main.Rscript":"/User/Pub/third_party/Rscript",
+    "main.refdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/database/GRCh38/star_index",
+    "main.Python3": "/User/Pub/third_party/python3",
+    "main.species":"GRCh38",
+    "main.original":"pbmc",
+    "main.SampleTime":"2019-12-25",
+    "main.ExperimentalTime":"2019-12-25"
+  }
+  
+```
+- Step 3:  Run this pipeline.
+
+```
+java -jar cromwell-35.jar run -i config.json ../../pipelines/Droplet_single.wdl
+```
+
+- Step 4: Check results.
+```
+# After all analysis processes ending, you will get these files below:
+$ cd result && ls
+outs/  report/  temp/  /symbol workflowtime.log
+
+$ ls out
+cell_barcodes.txt  cluster.h5ad  count_mtx.tsv.gz  final.bam
+
+$ ls report
+alignment_report.csv  annotated_report.csv  cell_report.csv  cluster.csv  cutoff.csv  iDrop_demo.html  marker.csv  RNA_counts.pdf  sample.csv  sequencing_report.csv  vln.csv
+
+$ ls symbol
+# In single_Species result,there are some follow files will be generated:
+
+makedir_sigh.txt parseFastq_sigh.txt fastq2bam_sigh.txt sortBam_sigh.txt cellCount_sigh.txt cellCalling_sigh.txt countMatrix_sigh.txt report_sigh.txt
+```
+
+So the final html report is at `outdir Path`/report/iDrop_*.html
+
+## mus musculus 3T3 cell lines
 
 - Step 1: Prepare fastq
 We provide mouse(mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0196716/CNX0150683/CNR0192173/)
@@ -102,6 +164,7 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/mm10/gtf/genes.gtf",
     "main.ID": "demo",
+    "main.expectCell": "0",
     "main.umilow": "50",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/result",
     "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
@@ -164,6 +227,7 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/gtf/genes.gtf",
     "main.ID": "demo",
+    "main.expectCell": "0",
     "main.umilow": "50",
     "main.chrom":"/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/species_binding.txt",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/result",
