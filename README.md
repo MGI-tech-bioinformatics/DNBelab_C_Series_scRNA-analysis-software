@@ -91,7 +91,7 @@ Please refer to [Database](https://github.com/MGI-tech-bioinformatics/DNBelab_C_
 ## 4k PBMCs
 
 - Step 1: Prepare fastq
-There are 4k PBMCs samples that were sequenced on the MGISEQ-2000. The raw data can be found [here].(http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0223751/CNX0181011/)
+There are 4k PBMCs samples that were sequenced on the MGISEQ-2000. The raw data can be found [here](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0223751/CNX0181011/).
 
 - Step 2: Setup configure file.
 ```
