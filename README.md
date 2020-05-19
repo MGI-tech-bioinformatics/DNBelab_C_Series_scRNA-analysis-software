@@ -52,6 +52,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 We provide mouse(mm10) and mixed dual species databases for download, including fasta, gtf, and STAR(V2.7.3a) index files.
 - **Mouse(mm10)** [mm10](http://ftp.cngb.org/pub/CNSA/CNP0000906/)
 - **Mixed Database(GRCh38 & mm10)** [GRCh38 & mm10](http://ftp.cngb.org/pub/CNSA/CNP0000906/)
+Note: Mixed dual species databases only for double species sample analysis.
 
 ## or you can build the database youself
 Firstly, you need to prepare the fasta and gtf files of the reference database. And then build STAR index files. Please refer to the following command lines.
