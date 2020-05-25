@@ -49,9 +49,10 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 # Database
 
 ## Download ready-made datasets
-We provide mouse(mm10) and mixed dual species databases for download, including fasta, gtf, and STAR(V2.7.3a) index files.
-- **Mouse(mm10)** [mm10](http://ftp.cngb.org/pub/CNSA/CNP0000906/)
-- **Mixed Database(GRCh38 & mm10)** [GRCh38 & mm10](http://ftp.cngb.org/pub/CNSA/CNP0000906/)
+We provide the following databases for [download](http://ftp.cngb.org/pub/CNSA/CNP0000906/), including fasta, gtf, and STAR(V2.7.3a) index files.
+- **human(GRCh38)**
+- **mouse(GRCm38)** 
+- **Mixed Database(GRCh38 & GRCm38)** 
 
 Note: Mixed dual species databases only for double species sample analysis.
 
