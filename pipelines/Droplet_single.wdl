@@ -289,7 +289,7 @@ task report {
       echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv
       echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv
       ${Python3} ${root}/scripts/idrop.py single ${outdir}/report iDrop_${ID}
-      echo "rm ${outdir}/temp/*bam ${outdir}/temp/*fq" > ${outdir}/clean.sh
+      echo "rm ${outdir}/temp/*bam ${outdir}/temp/*fq.gz" > ${outdir}/clean.sh
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/report_sigh.txt
     fi
   }
