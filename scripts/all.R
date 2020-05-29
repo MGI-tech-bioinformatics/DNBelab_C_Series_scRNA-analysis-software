@@ -145,7 +145,7 @@ cat(paste("Median UMI Counts per Cell (",Species2,"),", round(UMI_median_Mouse),
 cat(paste("Median Genes per Cell (",Species1,"),", round(Gene_median_Human),"\n",sep=""),file=paste(opt$output,"/cell_report.csv",sep=""), append=T)
 cat(paste("Median Genes per Cell (",Species2,"),", round(Gene_median_Mouse),"\n",sep=""),file=paste(opt$output,"/cell_report.csv",sep=""), append=T)
 cat(paste("Single cell,", CellNum, "\n",sep=""),file=paste(opt$output,"/mix_report.csv",sep=""))
-cat(paste("Mix Cells,", sum['Mix'], "\n",sep=""),file=paste(opt$output,"/mix_report.csv",sep=""), append=T)
+cat(paste("Mix Cell,", sum['Mix'], "\n",sep=""),file=paste(opt$output,"/mix_report.csv",sep=""), append=T)
 cat(paste("Multiplet rate,", round(umi_mix_ratio,3)*100, "%\n",sep=""),file=paste(opt$output,"/mix_report.csv",sep=""), append=T)
 write.csv(small[,c("BARCODE","Raw","Human_UB","Human_GN","Mouse_UB","Mouse_GN","Species")],file=paste(opt$output,"/vln.csv",sep=""),row.names=FALSE,quote=FALSE)
 write.csv(tmp,file=paste(opt$output,"/cutoff.csv",sep=""),row.names=FALSE,quote=FALSE)
