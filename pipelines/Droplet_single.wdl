@@ -258,7 +258,7 @@ task countMatrix {
         source ${lib}
       fi
       ${root}/bin/PISA count -@ ${cpp} -tag CB -anno_tag GN -umi UB -o ${outdir}/outs/count_mtx.tsv -list ${list} ${anno}
-      gzip ${outdir}/outs/count_mtx.tsv
+      gzip -f ${outdir}/outs/count_mtx.tsv
       ${Python3} ${root}/scripts/scRNA_scanpy_clustering.py ${outdir}/outs/count_mtx.tsv.gz ${outdir}/report/
       echo "[`date +%F` `date +%T`] workflow end" >> ${outdir}/workflowtime.log
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/countMatrix_sigh.txt
