@@ -84,8 +84,6 @@ An input JSON file includes all input parameters and genome reference index dire
 
 ## Example - single_Species
 
-## mus musculus 3T3 cell lines
-
 - Step 1: Prepare fastq
 We provide mouse(mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0196716/CNX0150683/CNR0192173/)
 
