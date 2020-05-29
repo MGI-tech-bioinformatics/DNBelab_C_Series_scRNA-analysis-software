@@ -188,7 +188,7 @@ task sortBam {
     fi
   }
   output {
-    String anno="${outdir}/temp/annotated.bam"
+    String anno="${outdir}/outs/final.bam"
   }
 }
 
