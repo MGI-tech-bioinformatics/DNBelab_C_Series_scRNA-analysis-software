@@ -108,15 +108,15 @@ Gene_mean = mean(small$GN)
 small$total = small[,paste(Species1,"_UB",sep="")] + small[,paste(Species2,"_UB",sep="")]
 small = small[order(small$total, decreasing = T),]
 
-small$Species_UMI = "Mix"
-small[small[,paste(Species1,"_UB",sep="")]/small$total<0.1,]$Species_UMI=Species2
-small[small[,paste(Species2,"_UB",sep="")]/small$total<0.1,]$Species_UMI=Species1
+small$Species = "Mix"
+small[small[,paste(Species1,"_UB",sep="")]/small$total<0.1,]$Species=Species2
+small[small[,paste(Species2,"_UB",sep="")]/small$total<0.1,]$Species=Species1
 
-small$Species_UMI = as.factor(small$Species_UMI)
-sum = summary(small$Species_UMI)
+small$Species = as.factor(small$Species)
+sum = summary(small$Species)
 umi_mix_ratio = round(sum['Mix']/sum(sum),digits=4)
-small1 <- subset(small, small$Species_UMI==Species2)
-small2 <- subset(small, small$Species_UMI==Species1)
+small1 <- subset(small, small$Species==Species2)
+small2 <- subset(small, small$Species==Species1)
 small1$UB = small1[,paste(Species2,"_UB",sep="")]
 small1$GN = small1[,paste(Species2,"_GN",sep="")]
 small2$UB = small2[,paste(Species1,"_UB",sep="")]
@@ -154,10 +154,10 @@ write.table(cc$BARCODE, file=paste(opt$output,"/cell_barcodes.txt",sep=""),row.n
 png(file=paste(opt$output,"/mixture_cells.png",sep=""), width=1200,height=400,res=80)
 x = max(small$Human_UB)*.5
 y = max(small$Mouse_UB)*.75
-p1 <- ggplot(small, aes(x=Human_UB,y=Mouse_UB,color=Species_UMI)) + geom_point()  +scale_color_manual(values=c("Human" = "blue", "Mouse" =  "red", "Mix"="#999999")) + labs(title=paste("Multiplet rate = ", round(umi_mix_ratio,3)*100, "%", sep="")) + xlab(paste("Human cells : ",sum['Human'],sep="")) + ylab(paste("Mouse cells : ",sum['Mouse'])) + annotate("text",x=x,y=y, label=paste("Mix cells : ", sum['Mix']), size=10,color="#999999") + theme(plot.title = element_text(color="red", size=24, face="bold.italic"), panel.background = element_blank(),axis.line = element_line(colour = "black"), axis.title.x = element_text(color="blue", size=24, face="bold.italic"), axis.title.y = element_text(color="red", size=24, face="bold.italic"))
-p2 <- ggplot(small.new, aes(y=UB,x=Species_UMI)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("UMI")
-p3 <- ggplot(small.new, aes(y=GN,x=Species_UMI)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("Genes")
-p4 <- ggplot(small.new, aes(y=Raw,x=Species_UMI)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("Raw reads")
+p1 <- ggplot(small, aes(x=Human_UB,y=Mouse_UB,color=Species)) + geom_point()  +scale_color_manual(values=c("Human" = "blue", "Mouse" =  "red", "Mix"="#999999")) + labs(title=paste("Multiplet rate = ", round(umi_mix_ratio,3)*100, "%", sep="")) + xlab(paste("Human cells : ",sum['Human'],sep="")) + ylab(paste("Mouse cells : ",sum['Mouse'])) + annotate("text",x=x,y=y, label=paste("Mix cells : ", sum['Mix']), size=10,color="#999999") + theme(plot.title = element_text(color="red", size=24, face="bold.italic"), panel.background = element_blank(),axis.line = element_line(colour = "black"), axis.title.x = element_text(color="blue", size=24, face="bold.italic"), axis.title.y = element_text(color="red", size=24, face="bold.italic"))
+p2 <- ggplot(small.new, aes(y=UB,x=Species)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("UMI")
+p3 <- ggplot(small.new, aes(y=GN,x=Species)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("Genes")
+p4 <- ggplot(small.new, aes(y=Raw,x=Species)) +geom_violin(stat="ydensity") + theme_classic() +geom_jitter(alpha=0.2,color="blue") + theme(axis.title.x=element_blank(),axis.title.y=element_text(size=20, face="bold.italic"),axis.text.x= element_text(size=14, face="bold.italic"),axis.ticks.x=element_blank()) + ylab("Raw reads")
 pict1 <- plot_grid(p1, p2, p3,p4, rel_widths = c(4,2,2,2),ncol=4)
 pict1
 dev.off()
