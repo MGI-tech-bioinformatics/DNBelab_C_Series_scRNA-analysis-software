@@ -85,7 +85,7 @@ An input JSON file includes all input parameters and genome reference index dire
 ## Example - single_Species
 
 - Step 1: Prepare fastq
-We provide mouse(mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0196716/CNX0150683/CNR0192173/)
+We provide PBMCs sample fastq by pairs sequencing for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0232089/CNX0190688/CNR0248280/)
 
 - Step 2: Setup configure file.
 ```
@@ -98,16 +98,16 @@ $ cat config.json
     "main.fastq1": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/read_1.fq.gz",
     "main.fastq2": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/read_2.fq.gz",
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
-    "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/mm10/gtf/genes.gtf",
+    "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38/gtf/genes.gtf",
     "main.ID": "demo",
     "main.expectCell": "0",
     "main.umilow": "50",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/result",
     "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
     "main.Rscript":"/User/Pub/third_party/Rscript",
-    "main.refdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/mm10/star_index",
+    "main.refdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38/star_index",
     "main.Python3": "/User/Pub/third_party/python3",
-    "main.species":"mm10",
+    "main.species":"human",
     "main.original":"cell line",
     "main.SampleTime":"2019-12-25",
     "main.ExperimentalTime":"2019-12-25"
