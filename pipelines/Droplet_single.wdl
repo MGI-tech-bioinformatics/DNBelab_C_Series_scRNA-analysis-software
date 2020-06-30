@@ -129,8 +129,8 @@ task parseFastq {
       if [ -f ${default=abjdbashj lib} ]; then
       source ${lib}
       fi
-      ${root}/bin/PISA parse -t ${cpp} -f -q 20 -dropN -config ${config} -cbdis ${outdir}/temp/barcode_counts_raw.txt -run ${default=1 runID} -report ${outdir}/report/sequencing_report.csv ${fastq1} ${fastq2} |gzip -c  > ${outdir}/temp/reads.fq.gz
-      head -n 50000 ${outdir}/temp/barcode_counts_raw.txt |cut -f1 > ${outdir}/temp/barcode_raw_list.txt
+      ${root}/bin/PISA parse -t ${cpp} -f -q 20 -dropN -config ${config} -cbdis ${outdir}/temp/barcode_counts_raw.txt -run ${default=1 runID} -report ${outdir}/report/sequencing_report.csv ${fastq1} ${fastq2} |gzip -c  > ${outdir}/temp/reads.fq.gz &&\
+      head -n 50000 ${outdir}/temp/barcode_counts_raw.txt |cut -f1 > ${outdir}/temp/barcode_raw_list.txt &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/parseFastq_sigh.txt
     fi
   }
@@ -156,8 +156,8 @@ task fastq2bam {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/STAR --outStd SAM --outSAMunmapped Within --runThreadN ${cpp} --genomeDir ${refdir} --readFilesCommand gzip -dc --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ 1> aln.sam
-      ${root}/bin/PISA sam2bam -@ ${cpp} -k -o ${outdir}/temp/aln.bam -report ${outdir}/report/alignment_report.csv aln.sam && rm -f aln.sam 
+      ${root}/bin/STAR --outStd SAM --outSAMunmapped Within --runThreadN ${cpp} --genomeDir ${refdir} --readFilesCommand gzip -dc --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ 1> aln.sam &&\
+      ${root}/bin/PISA sam2bam -@ ${cpp} -k -o ${outdir}/temp/aln.bam -report ${outdir}/report/alignment_report.csv aln.sam && rm -f aln.sam &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/fastq2bam_sigh.txt
     fi
   }
@@ -181,9 +181,9 @@ task sortBam {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/sambamba sort -t ${cpp} -o ${outdir}/temp/sorted.bam ${outdir}/temp/aln.bam
-      ${root}/bin/PISA anno -gtf ${gtf} -o ${outdir}/temp/annotated.bam -report ${outdir}/report/annotated_report.csv ${outdir}/temp/sorted.bam
-      ${root}/bin/PISA corr -tag UB -tags-block CB,GN -@ ${cpp} -t ${cpp} -o ${outdir}/outs/final.bam ${outdir}/temp/annotated.bam
+      ${root}/bin/sambamba sort -t ${cpp} -o ${outdir}/temp/sorted.bam ${outdir}/temp/aln.bam &&\
+      ${root}/bin/PISA anno -gtf ${gtf} -o ${outdir}/temp/annotated.bam -report ${outdir}/report/annotated_report.csv ${outdir}/temp/sorted.bam &&\
+      ${root}/bin/PISA corr -tag UB -tags-block CB,GN -@ ${cpp} -t ${cpp} -o ${outdir}/outs/final.bam ${outdir}/temp/annotated.bam &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/sortBam_sigh.txt
     fi
   }
@@ -206,7 +206,7 @@ task cellCount {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -@ ${cpp} -dedup -o ${outdir}/temp/cell_stat.txt -list ${rawlist} ${bam}
+      ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -@ ${cpp} -dedup -o ${outdir}/temp/cell_stat.txt -list ${rawlist} ${bam} &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCount_sigh.txt
     fi
   }
@@ -231,7 +231,7 @@ task cellCalling {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=50 umilow}
+      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=50 umilow} &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
     fi
   }
@@ -257,10 +257,10 @@ task countMatrix {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/PISA count -@ ${cpp} -tag CB -anno_tag GN -umi UB -o ${outdir}/outs/count_mtx.tsv -list ${list} ${anno}
-      gzip -f ${outdir}/outs/count_mtx.tsv
-      ${Python3} ${root}/scripts/scRNA_scanpy_clustering.py ${outdir}/outs/count_mtx.tsv.gz ${outdir}/report/
-      echo "[`date +%F` `date +%T`] workflow end" >> ${outdir}/workflowtime.log
+      ${root}/bin/PISA count -@ ${cpp} -tag CB -anno_tag GN -umi UB -o ${outdir}/outs/count_mtx.tsv -list ${list} ${anno} &&\
+      gzip -f ${outdir}/outs/count_mtx.tsv &&\
+      ${Python3} ${root}/scripts/scRNA_scanpy_clustering.py ${outdir}/outs/count_mtx.tsv.gz ${outdir}/report/ &&\
+      echo "[`date +%F` `date +%T`] workflow end" >> ${outdir}/workflowtime.log &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/countMatrix_sigh.txt
     fi
   }
@@ -283,13 +283,12 @@ task report {
     if [ -f ${outdir}/symbol/report_sigh.txt ];then
       echo "report node success"
     else
-      echo "Name,${ID}" > ${outdir}/report/sample.csv
-      echo "Original,${default=Null original}" >>  ${outdir}/report/sample.csv
-      echo "Species,${default=Null species}" >> ${outdir}/report/sample.csv
-      echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv
-      echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv
-      ${Python3} ${root}/scripts/idrop.py single ${outdir}/report iDrop_${ID}
-      echo "rm ${outdir}/temp/*bam ${outdir}/temp/*fq.gz" > ${outdir}/clean.sh
+      echo "Name,${ID}" > ${outdir}/report/sample.csv &&\
+      echo "Original,${default=Null original}" >>  ${outdir}/report/sample.csv &&\
+      echo "Species,${default=Null species}" >> ${outdir}/report/sample.csv &&\
+      echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv &&\
+      echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv &&\
+      ${Python3} ${root}/scripts/idrop.py single ${outdir}/report iDrop_${ID} &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/report_sigh.txt
     fi
   }

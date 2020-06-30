@@ -99,13 +99,12 @@ task report {
     if [ -f ${outdir}/symbol/report_sigh.txt ];then
       echo "report node success"
     else
-      echo "Name,${ID}" > ${outdir}/report/sample.csv
-      echo "Original,${default=Null original}" >>  ${outdir}/report/sample.csv
-      echo "Species,${default=Null species}" >> ${outdir}/report/sample.csv
-      echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv
-      echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv
-      ${Python3} ${root}/scripts/idrop.py two ${outdir}/report iDrop_${ID}
-      echo "rm ${outdir}/temp/*fq.gz ${outdir}/temp/*bam" >> ${outdir}/clear.sh
+      echo "Name,${ID}" > ${outdir}/report/sample.csv &&\
+      echo "Original,${default=Null original}" >>  ${outdir}/report/sample.csv &&\
+      echo "Species,${default=Null species}" >> ${outdir}/report/sample.csv &&\
+      echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv &&\
+      echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv &&\
+      ${Python3} ${root}/scripts/idrop.py two ${outdir}/report iDrop_${ID} &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/report_sigh.txt
     fi
   }
@@ -128,11 +127,11 @@ task cellCalling {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      awk '{print$1}' ${count} > ${outdir}/temp/tmp_id.txt
-      sed -i '1d' ${outdir}/temp/tmp_id.txt
-      ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -list ${outdir}/temp/tmp_id.txt -group SP -dedup -o ${outdir}/temp/cell_counts_tmp.tsv -@ ${cpp} ${bam}
-      paste ${count} ${outdir}/temp/cell_counts_tmp.tsv |awk '{print$1"\t"$2"\t"$3"\t"$4"\t"$7"\t"$8"\t"$9"\t"$10}' > ${outdir}/temp/cell_counts_all.tsv
-      ${Rscript} ${root}/scripts/all.R -i ${outdir}/temp/cell_counts_all.tsv -o ${outdir}/report -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=50 umilow}
+      awk '{print$1}' ${count} > ${outdir}/temp/tmp_id.txt &&\
+      sed -i '1d' ${outdir}/temp/tmp_id.txt &&\
+      ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -list ${outdir}/temp/tmp_id.txt -group SP -dedup -o ${outdir}/temp/cell_counts_tmp.tsv -@ ${cpp} ${bam} &&\
+      paste ${count} ${outdir}/temp/cell_counts_tmp.tsv |awk '{print$1"\t"$2"\t"$3"\t"$4"\t"$7"\t"$8"\t"$9"\t"$10}' > ${outdir}/temp/cell_counts_all.tsv &&\
+      ${Rscript} ${root}/scripts/all.R -i ${outdir}/temp/cell_counts_all.tsv -o ${outdir}/report -e ${default=0 expectCell}  -f ${default=0 forceCell} -l ${default=50 umilow} &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
     fi
   >>>
@@ -154,7 +153,7 @@ task cellCount {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -@ ${cpp} -dedup -o ${outdir}/temp/cell_stat.txt -list ${rawlist} ${bam}
+      ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -@ ${cpp} -dedup -o ${outdir}/temp/cell_stat.txt -list ${rawlist} ${bam} &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCount_sigh.txt
     fi
   }
@@ -197,8 +196,8 @@ task parseFastq {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/PISA parse -t ${cpp} -f -q 20 -dropN -config ${config} -cbdis ${outdir}/temp/barcode_counts_raw.txt -run ${default=1 runID} -report ${outdir}/report/sequencing_report.csv ${fastq1} ${fastq2} |gzip -c  > ${outdir}/temp/reads.fq.gz
-      head -n 50000 ${outdir}/temp/barcode_counts_raw.txt |cut -f1 > ${outdir}/temp/barcode_raw_list.txt
+      ${root}/bin/PISA parse -t ${cpp} -f -q 20 -dropN -config ${config} -cbdis ${outdir}/temp/barcode_counts_raw.txt -run ${default=1 runID} -report ${outdir}/report/sequencing_report.csv ${fastq1} ${fastq2} |gzip -c  > ${outdir}/temp/reads.fq.gz &&\
+      head -n 50000 ${outdir}/temp/barcode_counts_raw.txt |cut -f1 > ${outdir}/temp/barcode_raw_list.txt &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/parseFastq_sigh.txt
     fi
   }
@@ -224,7 +223,7 @@ task fastq2bam {
         source ${lib}
       fi
       ${root}/bin/STAR --outSAMmultNmax 1 --outSAMunmapped Within --outStd SAM --runThreadN ${cpp} --genomeDir ${refdir} --readFilesCommand gzip -dc --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ > aln.sam && \
-      ${root}/bin/PISA sam2bam -k -o ${outdir}/temp/aln.bam -report ${outdir}/report/alignment_report.csv aln.sam && rm -f aln.sam 
+      ${root}/bin/PISA sam2bam -k -o ${outdir}/temp/aln.bam -report ${outdir}/report/alignment_report.csv aln.sam && rm -f aln.sam &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/fastq2bam_sigh.txt
     fi  
   }
@@ -248,13 +247,13 @@ task sortBam {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/sambamba sort -t ${cpp} -o ${outdir}/temp/sorted.bam ${outdir}/temp/aln.bam
-      ${root}/bin/PISA anno -gtf ${gtf} -o ${outdir}/temp/anno.bam -report ${outdir}/report/annotated_report.csv ${outdir}/temp/sorted.bam -@ ${cpp}
-      if [ -f ${default=asdlajhd chrom} ]; then
+      ${root}/bin/sambamba sort -t ${cpp} -o ${outdir}/temp/sorted.bam ${outdir}/temp/aln.bam &&\
+      ${root}/bin/PISA anno -gtf ${gtf} -o ${outdir}/temp/anno.bam -report ${outdir}/report/annotated_report.csv ${outdir}/temp/sorted.bam -@ ${cpp} 
+      if [ -f ${default=asdlajhd chrom} ]; then 
         ${root}/bin/PISA anno -chr-species ${chrom} -btag SP -@ ${cpp} -o ${outdir}/outs/anno_species.bam ${outdir}/temp/anno.bam
       else
         ${root}/bin/PISA anno -chr-species ${root}/config/species_binding.txt -btag SP -@ ${cpp} -o ${outdir}/outs/anno_species.bam ${outdir}/temp/anno.bam
-      fi
+      fi &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/sortBam_sigh.txt
     fi
   }
