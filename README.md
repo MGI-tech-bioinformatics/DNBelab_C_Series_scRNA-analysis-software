@@ -130,7 +130,7 @@ An input JSON file includes all input parameters and genome reference index dire
 ## Example - single_Species
 
 - Step 1: Prepare fastq
-We provide 100MB [Demo](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software/example/single_Species) sequencing data for testing.
+We provide 100MB [Demo](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software/tree/master/example/single_Species/fastq) sequencing data for testing.
 We also provide 36GB PBMCs sample fastq by pairs sequencing for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0232089/CNX0190688/CNR0248280/)
 
 - Step 2: Setup configure file.
