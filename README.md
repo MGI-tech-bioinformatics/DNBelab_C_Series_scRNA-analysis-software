@@ -29,6 +29,22 @@ Setup
     1. Please make sure that you run the docker container with at least 36GB memory and 10 CPU.
     2. The input is sample list and output directory which descripted below (Main progarm arguments).
     
+Prepare
+
+   cat config.json
+   
+   {
+    "main.fastq1": "/DNBelab_C4/rawfq/demo_1.fq.gz",                 
+    "main.fastq2": "/DNBelab_C4/rawfq/demo_2.fq.gz",                 
+    "main.ID": "Demo_single",                                        
+    "main.forceCell": "0",                                          
+    "main.umilow": "50",                                           
+    "main.species":"GRCh38",                                    
+    "main.original":"cell lines",                            
+    "main.SampleTime":"2020-06-25",                         
+    "main.ExperimentalTime":"2020-06-25"                    
+   }
+    
 Running
 1. Please set the following variables on your machine:
    (a) $DB_LOCAL: directory on your local machine that has the database files. Make sure that the directory must contains two subdirectories, "gtf" and "star_index". The gene annotation file named "genes.gtf" must be included under "gtf"; the genome index file for STAR under the "star_index". If you build the database youself, make sure the format of the directory path is correct.
