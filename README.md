@@ -29,6 +29,22 @@ Setup
     1. Please make sure that you run the docker container with at least 36GB memory and 10 CPU.
     2. The input is sample list and output directory which descripted below (Main progarm arguments).
     
+Prepare
+
+   cat config.json
+   
+   {
+    "main.fastq1": "/DNBelab_C4/rawfq/demo_1.fq.gz",                 
+    "main.fastq2": "/DNBelab_C4/rawfq/demo_2.fq.gz",                 
+    "main.ID": "Demo_single",                                        
+    "main.forceCell": "0",                                          
+    "main.umilow": "50",                                           
+    "main.species":"GRCh38",                                    
+    "main.original":"cell lines",                            
+    "main.SampleTime":"2020-06-25",                         
+    "main.ExperimentalTime":"2020-06-25"                    
+   }
+    
 Running
 1. Please set the following variables on your machine:
    (a) $DB_LOCAL: directory on your local machine that has the database files. Make sure that the directory must contains two subdirectories, "gtf" and "star_index". The gene annotation file named "genes.gtf" must be included under "gtf"; the genome index file for STAR under the "star_index". If you build the database youself, make sure the format of the directory path is correct.
@@ -130,7 +146,7 @@ An input JSON file includes all input parameters and genome reference index dire
 ## Example - single_Species
 
 - Step 1: Prepare fastq
-We provide 100MB [Demo](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software/example/single_Species) sequencing data for testing.
+We provide 100MB [Demo](https://pan.genomics.cn/ucdisk/s/bAn63e) sequencing data for testing.
 We also provide 36GB PBMCs sample fastq by pairs sequencing for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0232089/CNX0190688/CNR0248280/)
 
 - Step 2: Setup configure file.
@@ -194,7 +210,8 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
 Please refer to [Database](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software#Database)
 
 - Step 1: Prepare fastq
-We provide 52GB Mixed Sample(GRCh38 & mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0196715/CNX0144387/CNR0177382/)
+We provide 135MB [Demo](https://pan.genomics.cn/ucdisk/s/rIVJVf) sequencing data for testing.
+We also provide 52GB Mixed Sample(GRCh38 & mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0196715/CNX0144387/CNR0177382/)
 
 - Step 2: Setup configure file.
 ```
