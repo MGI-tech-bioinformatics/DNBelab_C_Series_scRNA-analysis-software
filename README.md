@@ -7,7 +7,7 @@
   - Workflow Description Language (WDL), Python3 and R scripts.
 - **Hardware/Software requirements** 
   - x86-64 compatible processors
-  - require at least 16GB of RAM, ideally 32GB. 
+  - require at least 36GB of RAM and 10 CPU. 
   - 64bit Linux
 - **Workflow**
 ![](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software/blob/master/doc/fig/workflow.jpg)
@@ -17,7 +17,52 @@
 - **pipelines**  WDL pipeline
 - **scripts**    miscellaneous scripts
 
-# Install
+# With Docker
+```
+Setup
+1. Install docker follow the official website
+    https://www.docker.com/
+2. Then do the following for the workflow:
+    docker pull huangshunkai/dnbelab_c4:latest
+    
+    Notes:
+    1. Please make sure that you run the docker container with at least 36GB memory and 10 CPU.
+    2. The input is sample list and output directory which descripted below (Main progarm arguments).
+    
+Running
+1. Please set the following variables on your machine:
+   (a) $DB_LOCAL: directory on your local machine that has the database files. Make sure that the directory must contains two subdirectories, "gtf" and "star_index". The gene annotation file named "genes.gtf" must be included under "gtf"; the genome index file for STAR under the "star_index". If you build the database youself, make sure the format of the directory path is correct.
+   (b) $DATA_LOCAL: directory on your local machine that has the sequence data and "config.json" file.
+      "config.json" must follow the format descripted bellow,
+      and the *PATH* in "config.json" must be absolute dicrtory of $DATA_LOCAL.
+   (c) $RESULT_LOCAL: directory for result.
+  
+2. Run the command:
+   10x sequence data:
+   docker run -d -P \
+   --name $scRNANAME \
+   -v $DB_LOCAL: /DNBelab_C4/database \
+   -v $DATA_LOCAL:/DNBelab_C4/rawfq \
+   -v $RESULT_LOCAL:/DNBelab_C4/result \
+   huangshunkai/dnbelab_c4:latest \
+   /bin/bash \
+   /DNBelab_C4/bin/10xRun.sh
+  
+   mgi sequence data:
+   docker run -d -P \
+   --name $scRNANAME \
+   -v $DB_LOCAL: /DNBelab_C4/database \
+   -v $DATA_LOCAL:/DNBelab_C4/rawfq \
+   -v $RESULT_LOCAL:/DNBelab_C4/result \
+   huangshunkai/dnbelab_c4:latest \
+   /bin/bash \
+   /DNBelab_C4/bin/mgiRun.sh
+  
+3. After satisfactory result was generated:
+   docker rm $scRNANAME
+```
+
+# Without Docker but run in local server
 ```
 $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software.git
 ```
@@ -49,7 +94,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 # Database
 
 ## Download ready-made datasets
-We provide the following databases for [download](http://ftp.cngb.org/pub/CNSA/CNP0000906/), including fasta, gtf, and STAR(V2.7.3a) index files.
+We provide the following databases for [download](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/), including fasta, gtf, and STAR(V2.7.3a) index files.
 - **human(GRCh38)**
 - **mouse(GRCm38)** 
 - **Mixed Database(GRCh38 & GRCm38)** 
@@ -85,7 +130,8 @@ An input JSON file includes all input parameters and genome reference index dire
 ## Example - single_Species
 
 - Step 1: Prepare fastq
-We provide PBMCs sample fastq by pairs sequencing for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0232089/CNX0190688/CNR0248280/)
+We provide 100MB [Demo](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software/example/single_Species) sequencing data for testing.
+We also provide 36GB PBMCs sample fastq by pairs sequencing for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0232089/CNX0190688/CNR0248280/)
 
 - Step 2: Setup configure file.
 ```
@@ -95,8 +141,8 @@ cd ./example/single_Species
 # Check configure file
 $ cat config.json
   {
-    "main.fastq1": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/read_1.fq.gz",
-    "main.fastq2": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/read_2.fq.gz",
+    "main.fastq1": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/fastq/Demo.human.fq.1.gz",
+    "main.fastq2": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/fastq/Demo.human.fq.1.gz",
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38/gtf/genes.gtf",
     "main.ID": "demo",
@@ -148,7 +194,7 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
 Please refer to [Database](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software#Database)
 
 - Step 1: Prepare fastq
-We provide Mixed Sample(GRCh38 & mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/CNP0000906/CNS0196715/CNX0144387/CNR0177382/)
+We provide 52GB Mixed Sample(GRCh38 & mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0196715/CNX0144387/CNR0177382/)
 
 - Step 2: Setup configure file.
 ```
@@ -225,7 +271,7 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
    
 5. Can I continuse to run the workflow if some errors were happended in the process?
 
-   Yes,  the result/symbol directory records the symbol for each step, you can delete the lastest symbol.txt file then keep the output path unchanged and run this pipeline after correct the error.
+   Yes,  the result/symbol directory records the symbol for each step, you can then keep the output path unchanged and run this pipeline after correct the error. If you use docker images, run the command `docker start $scRNANAME && docker exec -d $scRNANAME /bin/bash /DNBelab_C4/bin/10xRun.sh` or `docker start $scRNANAME && docker exec -d $scRNANAME /bin/bash /DNBelab_C4/bin/mgiRun.sh`.
 
 6. Why the inflection point is inaccurate on the total count curve?
 
