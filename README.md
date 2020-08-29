@@ -1,4 +1,4 @@
-# DNBelab<sup>TM</sup> C Series Single-Cell RNA Analysis Software
+# DNBelab C Series Single-Cell RNA Analysis Software
 
 # Introduction
 - **Propose**
