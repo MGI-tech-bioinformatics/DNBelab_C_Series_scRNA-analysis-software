@@ -72,6 +72,7 @@ workflow main {
     lib=lib,
     root=root,
     list=cellCalling.list,
+    rawlist=parseFastq.rawlist,
     outdir=outdir,
     anno=sortBam.anno,
     Rscript=Rscript,
@@ -242,6 +243,7 @@ task cellCalling {
 task countMatrix {
   String root
   String list
+  String rawlist
   String outdir
   String anno
   String ?lib
@@ -258,7 +260,8 @@ task countMatrix {
         source ${lib}
       fi
       ${root}/bin/PISA count -@ ${cpp} -tag CB -anno_tag GN -umi UB -o ${outdir}/outs/count_mtx.tsv -list ${list} ${anno} &&\
-      gzip -f ${outdir}/outs/count_mtx.tsv &&\
+      ${root}/bin/PISA count -@ ${cpp} -tag CB -anno_tag GN -umi UB -o ${outdir}/outs/raw_count_mtx.tsv -list ${rawlist} ${anno} &&\
+      gzip -f ${outdir}/outs/count_mtx.tsv ${outdir}/outs/raw_count_mtx.tsv &&\
       ${Python3} ${root}/scripts/scRNA_scanpy_clustering.py ${outdir}/outs/count_mtx.tsv.gz ${outdir}/report/ &&\
       echo "[`date +%F` `date +%T`] workflow end" >> ${outdir}/workflowtime.log &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/countMatrix_sigh.txt

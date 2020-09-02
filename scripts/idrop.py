@@ -79,8 +79,26 @@ class TempFileNameSingle(TempFileNameBase):
            "vln"
     ]
 
+    def getStatic(self):
+        path = Config.static_path
+        js_files = []
+        css_files = []
+        for (root, dirs, files) in os.walk(path):
+            for file in files:
+                if file.endswith("css"):
+                    css_files.append(os.path.join(root, file))
+                elif file.endswith("js"):
+                    js_files.append(os.path.join(root, file))
+        js_string = '\n'.join((load_file(js_file) for js_file in js_files))
+        css_string = '\n'.join((load_file(css_file) for css_file in css_files))
+        return {"js": js_string, "css": css_string}
+
     def getData(self):
-        data = {}
+#        data = {}
+        data = {
+            "static": self.getStatic()
+        }
+
         for key in self._keys:
             abspath = '{}.csv'.format(os.path.join(self.folder, key))
             print("开始读取文件[{}]".format(key))
@@ -259,7 +277,11 @@ class TempFileNameTwo(TempFileNameBase):
 
     def cell_report_callback(self, file):
         file_string = load_file(file)
-        samples = list(set(re.findall(r"\((.+?)\)", file_string)))
+        #samples = list(set(re.findall(r"\((.+?)\)", file_string)))
+        samples = []
+        for item in re.findall(r"\((.+?)\)", file_string):
+            if not item in samples:
+                samples.append(item)
         if samples.__len__() != 2:
             raise Exception("samples number != 2")
         # 原始的map
@@ -282,13 +304,17 @@ class TempFileNameTwo(TempFileNameBase):
 
     def annotated_report_callback(self, file):
         file_string = load_file(file)
-        samples = list(set(re.findall(r"\((.+?)\)", file_string)))
+        #samples = list(set(re.findall(r"\((.+?)\)", file_string)))
+        samples = []
+        for item in re.findall(r"\((.+?)\)", file_string):
+            if not item in samples:
+                samples.append(item)
         data_map = self.default_callback(file)
         r = {}
         if samples.__len__() == 0:
             sampleA = 'GRCh38'
             sampleB = 'mm10'
-            r={'sampleA': {'name': 'GRCh38', 'ReadsMappedConfidentlytoGenome': '-', 'ReadsMappedConfidentlytoGene': '-', 'ReadsMappedConfidentlytoExonicRegions': '-', 'ReadsMappedConfidentlytoIntronicRegions':     '-', 'ReadsMappedAntisensetoGene': '-'}, 'sampleB': {'name': 'mm10', 'ReadsMappedConfidentlytoGenome': '-', 'ReadsMappedConfidentlytoGene': '-', 'ReadsMappedConfidentlytoExonicRegions': '-', 'ReadsMapped    ConfidentlytoIntronicRegions': '-', 'ReadsMappedAntisensetoGene': '-'}}
+            r={'sampleA': {'name': 'GRCh38', 'ReadsMappedConfidentlytoGenome': '-', 'ReadsMappedConfidentlytoGene': '-', 'ReadsMappedConfidentlytoExonicRegions': '-', 'ReadsMappedConfidentlytoIntronicRegions':     '-', 'ReadsMappedAntisensetoGene': '-'}, 'sampleB': {'name': 'mm10', 'ReadsMappedConfidentlytoGenome': '-', 'ReadsMappedConfidentlytoGene': '-', 'ReadsMappedConfidentlytoExonicRegions': '-', 'ReadsMappedConfidentlytoIntronicRegions': '-', 'ReadsMappedAntisensetoGene': '-'}}
         elif samples.__len__() == 2:
             sampleA = samples[0]
             sampleB = samples[1]

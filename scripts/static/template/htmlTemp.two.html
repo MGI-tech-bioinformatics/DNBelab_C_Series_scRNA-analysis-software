@@ -14,7 +14,7 @@
         </div>
         <div class="header-line"></div>
         <div class="iDrop_Report">
-          DNBelab<sup>TM</sup> C <label en="Series" zh="系列"></label><br/>
+          DNBelab C <label en="Series" zh="系列"></label><br/>
           <label en="Single-Cell RNA Analysis Report V1.0.0" zh="单细胞RNA分析报告 V1.0.0" style="color: #00a19c;font-size: 24px;"></label>
         </div>
       </div>
@@ -131,7 +131,7 @@
             <div class="question" onclick="closeQuestion(this)">×</div>
           </div>
           <div class="content-chart1">
-            <div id="line_1" style="height: 130%; width: 86%;"></div>
+            <div id="line_1" style="height: 90%; width: 90%;"></div>
           </div>
           <div class="content-data">
             <div class="data">
@@ -203,276 +203,8 @@
         </div>
     </div>
 
-    <!-- sequencing-->
+    <!-- Sequencing-->
 <div style="display: flex;">
-        <div class="content1">
-          <div class="content-title">
-            <label en="Mapping" zh="比对"></label>
-            <div class="question" onclick="changeQuestion(this)">?</div>
-          </div>
-          <div class="content-detail">
-            <div class="content-question">
-              <div class="question-main">
-                <!-- raw -->
-                <label style="font-weight: bold;" zh="比对上基因组的Reads数："
-                  en="Reads Mapped Confidently to Genome:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在质控后的reads中，能成功比对上基因组且对比质量大于20的reads占比百分数。"
-                    en="The percentage of reads mapped to a unique genome with a mapping quality of 20 or higher."></label><br />
-                </div>
-                <!-- sampleA -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}基因组的Reads数："
-                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Genome:"></label><br />
-                <div style="margin: 0 0 10px 30px;"><label
-                    zh="本项反映了在质控后的reads中，能成功比对上{{annotated_report.sampleA.name}}基因组且对比质量大于20的reads占比百分数。"
-                    en="The percentage of reads mapped to a unique {{annotated_report.sampleA.name}} genome with a mapping quality of 20 or higher."></label><br />
-                </div>
-                <!-- sampleB -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleBname}}基因组的Reads数："
-                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Genome:"></label><br />
-                <div style="margin: 0 0 10px 30px;"><label
-                    zh="本项反映了在质控后的reads中，能成功比对上{{annotated_report.sampleA.name}}基因组且对比质量大于20的reads占比百分数。"
-                    en="The percentage of reads mapped to a unique {{annotated_report.sampleB.name}} genome with a mapping quality of 20 or higher."></label><br />
-                </div>
-
-                <!-- raw -->
-                <label style="font-weight: bold;" zh="比对上基因的Reads数："
-                  en="Reads Mapped Confidently to Gene:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上基因的reads占比百分数。"
-                    en="The percentage of reads mapped to a reference genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-                <!-- sampleA -->
-                <label style="font-weight: bold;" zh="比对{{annotated_report.sampleA.name}}上基因的Reads数："
-                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Gene:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上基因的reads占比百分数。"
-                    en="The percentage of reads mapped to a {{annotated_report.sampleA.name}} reference genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-                <!-- sampleB -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}基因组的Reads数："
-                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Gene:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上基因的reads占比百分数。"
-                    en="The percentage of reads mapped to a {{annotated_report.sampleB.name}} reference genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-
-                <!-- raw -->
-                <label style="font-weight: bold;" zh="比对上外显子区的reads数："
-                  en="Reads Mapped Confidently to Exonic Regions:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
-                    en="The percentage of reads mapped to the exonic regions of the genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-                <!-- sampleA -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}外显子区的reads数："
-                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Exonic Regions:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
-                    en="The percentage of reads mapped to the exonic regions of the {{annotated_report.sampleA.name}} genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-                <!-- sampleB -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}外显子区的reads数："
-                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Exonic Regions:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
-                    en="The percentage of reads mapped to the exonic regions of the {{annotated_report.sampleB.name}} genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-
-                <!-- raw -->
-                <label style="font-weight: bold;" zh="比对上内含子区的reads数："
-                  en="Reads Mapped Confidently to Intronic Regions:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
-                    en="The percentage of reads mapped to the intron regions of the genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-                <!-- sampleA -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}内含子区的reads数："
-                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Intron Regions:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
-                    en="The percentage of reads mapped to the intron regions of the {{annotated_report.sampleA.name}} genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-                <!-- sampleB -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}内含子区的reads数："
-                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Intron Regions:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
-                    en="The percentage of reads mapped to the intron regions of the {{annotated_report.sampleB.name}} genome with a mapping quality score of 20 or higher."></label><br />
-                </div>
-
-                <!-- raw -->
-                <label style="font-weight: bold;" zh="比对上基因反义链的Reads数："
-                  en="Reads Mapped Antisense to Gene:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
-                    en="The percentage of reads mapped antisense to genes."></label>
-                </div>
-                <!-- sampleA -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}基因反义链的Reads数："
-                  en="{{annotated_report.sampleA.name}} Reads Mapped Antisense to Gene:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label
-                    zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
-                    en="The percentage of {{annotated_report.sampleA.name}} reads mapped antisense to genes."></label>
-                </div>
-                <!-- sampleB -->
-                <label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}基因反义链的Reads数："
-                  en="{{annotated_report.sampleB.name}} Reads Mapped Antisense to Gene:"></label><br />
-                <div style="margin: 0 0 10px 30px;">
-                  <label
-                    zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
-                    en="The percentage of {{annotated_report.sampleB.name}} reads mapped antisense to genes."></label>
-                </div>
-              </div>
-              <div class="question" onclick="closeQuestion(this)">×</div>
-            </div>
-            <div class="content-data1">
-              <div class="data">
-                <label en="Reads Mapped Confidently to Genome" zh="比对上基因组的Reads数"></label>
-                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoGenome}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Genome"
-                  zh="比对上{{annotated_report.sampleA.name}}基因组的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoGenome}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Genome"
-                  zh="比对上{{annotated_report.sampleB.name}}基因组的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoGenome}}</div>
-              </div>
-
-              <div class="data">
-                <label en="Reads Mapped Confidently to Gene" zh="比对上基因的Reads数"></label>
-                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoGene}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Gene"
-                  zh="比对上{{annotated_report.sampleA.name}}基因的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoGene}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Gene"
-                  zh="比对上{{annotated_report.sampleA.name}}基因的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoGene}}</div>
-              </div>
-
-              <div class="data">
-                <label en="Reads Mapped Confidently to Exonic Regions" zh="比对上外显子区的Reads数"></label>
-                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoExonicRegions}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Exonic Regions"
-                  zh="比对上{{annotated_report.sampleA.name}}外显子区的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoExonicRegions}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Exonic Regions"
-                  zh="比对上{{annotated_report.sampleB.name}}外显子区的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoExonicRegions}}</div>
-              </div>
-
-              <div class="data">
-                <label en="Reads Mapped Confidently to Intronic Regions" zh="比对上内含子区的Reads数"></label>
-                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoIntronicRegions}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Intronic Regions"
-                  zh="比对上{{annotated_report.sampleA.name}}内含子区的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoIntronicRegions}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Intronic Regions"
-                  zh="比对上{{annotated_report.sampleB.name}}内含子区的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoIntronicRegions}}</div>
-              </div>
-
-              <div class="data">
-                <label en="Reads Mapped Antisense to Gene" zh="比对上基因反义链的Reads数"></label>
-                <div class="data-num">{{annotated_report.ReadsMappedAntisensetoGene}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleA.name}} Reads Mapped Antisense to Gene"
-                  zh="比对上{{annotated_report.sampleA.name}}基因反义链的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleA.ReadsMappedAntisensetoGene}}</div>
-              </div>
-
-              <div class="data">
-                <label en="{{annotated_report.sampleB.name}} Reads Mapped Antisense to Gene"
-                  zh="比对上{{annotated_report.sampleB.name}}基因反义链的Reads数"></label>
-                <div class="data-num">{{annotated_report.sampleB.ReadsMappedAntisensetoGene}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-  <div class="content1">
-    <div class="content-title">
-      <label en="Mixing" zh="混合"></label>
-      <div class="question" onclick="changeQuestion(this)">?</div>
-    </div>
-    <div class="content-detail" style="height: 90%; width: 100%;">      
-      <div class="content-question">
-        <div class="question-main">
-            <!--  -->
-            <label style="font-weight: bold;" zh="细胞>0的细胞标签数" en="Cell Barcodes with >0 Cells"></label>
-            <div style="margin: 0 0 10px 30px;">
-              <label zh="与至少一个细胞相关的细胞条形码数。" en="Number of barcodes associated with at least one cell."></label>
-            </div>
-            <!--  -->
-            <label style="font-weight: bold;" zh="细胞>1的细胞标签数" en="Cell Barcodes with >1 Cells"></label>
-            <div style="margin: 0 0 10px 30px;">
-              <label zh="推断与多个细胞相关的细胞条形码数。" en="The infered number of barcodes that associated with multiple cells."></label>
-            </div>
-            <!--  -->
-            <label style="font-weight: bold;" zh="多细胞占比" en="Multiplet Rate"></label>
-            <div style="margin: 0 0 10px 30px;">
-              <label zh="推断与多个细胞相关的细胞条形码占比。" en="The percentage of barcodes associated with multiple cells."></label>
-            </div>
-            <label style="font-weight: bold;" zh="Plot of mixutres" en="Plot of mixutres"></label><br />
-            <div style="margin: 0 0 10px 30px;">
-              <label
-                zh="散点图中每个点代表着一个细胞相关的标签，坐标值分别代表每个细胞比对上{{vln.Samples[0]}}或 {{vln.Samples[1]}}参考基因组的UMI总数。点的颜色代表推测出的细胞类型，其中multiplet代表有多个细胞带有同个细胞标签。"
-                en="In the scatter, each point represents a cell-associated barcode and two-dimensional horizontal and vertical coordinates of each dot represent the total number of umi mapped to GRCh38 or mm10, respectively. Each dot is colored according to the inferred cell type, where multiplet represents the same cell barcode shared by multiple cells."></label><br />
-            </div>
-        </div>
-        <div class="question" onclick="closeQuestion(this)">×</div>
-      </div>
-      <div class="content-chart4" style="margin: 10 auto;">
-        <div id="id-div-mix-data" style="width: 95%; padding: 0 20px;">
-                  <!-- mix指标 -->
-                <div class="data">
-                  <label en="Cell Barcodes with >0 Cells" zh="细胞>0的细胞标签数"></label>
-                  <div class="data-num">{{mix_report.Singlecell}}</div>
-                </div>
-                <div class="data">
-                  <label en="Cell Barcodes with >1 Cells" zh="细胞>1的细胞标签数"></label>
-                  <div class="data-num">{{mix_report.MixCells}}</div>
-                </div>
-                <div class="data">
-                  <label en="Multiplet Rate" zh="多细胞占比"></label>
-                  <div class="data-num">{{mix_report.Multipletrate}}</div>
-                </div>
-          </div>
-        <div id="id-mix-plot" style="height: 80%; width: 100%; margin: 0 auto; padding: 0 20px;"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <!-- 比对 -->
-    <div style="display: flex;">
   <div class="content1">
     <div class="content-title">
       <label en="Sequencing" zh="测序"></label>
@@ -580,6 +312,275 @@
       </div>
     </div>
   </div>
+
+  <div class="content1">
+    <div class="content-title">
+      <label en="Mixing" zh="混合"></label>
+      <div class="question" onclick="changeQuestion(this)">?</div>
+    </div>
+    <!--div class="content-detail" style="height: 90%; width: 100%;"-->      
+    <div class="content-detail" style="height: 83.5%;">
+      <div class="content-question">
+        <div class="question-main">
+            <!--  -->
+            <label style="font-weight: bold;" zh="细胞>0的细胞标签数" en="Cell Barcodes with >0 Cells"></label>
+            <div style="margin: 0 0 10px 30px;">
+              <label zh="与至少一个细胞相关的细胞条形码数。" en="Number of barcodes associated with at least one cell."></label>
+            </div>
+            <!--  -->
+            <label style="font-weight: bold;" zh="细胞>1的细胞标签数" en="Cell Barcodes with >1 Cells"></label>
+            <div style="margin: 0 0 10px 30px;">
+              <label zh="推断与多个细胞相关的细胞条形码数。" en="The infered number of barcodes that associated with multiple cells."></label>
+            </div>
+            <!--  -->
+            <label style="font-weight: bold;" zh="多细胞占比" en="Multiplet Rate"></label>
+            <div style="margin: 0 0 10px 30px;">
+              <label zh="推断与多个细胞相关的细胞条形码占比。" en="The percentage of barcodes associated with multiple cells."></label>
+            </div>
+            <label style="font-weight: bold;" zh="Plot of mixutres" en="Plot of mixutres"></label><br />
+            <div style="margin: 0 0 10px 30px;">
+              <label
+                zh="散点图中每个点代表着一个细胞相关的标签，坐标值分别代表每个细胞比对上{{vln.Samples[0]}}或 {{vln.Samples[1]}}参考基因组的UMI总数。点的颜色代表推测出的细胞类型，其中multiplet代表有多个细胞带有同个细胞标签。"
+                en="In the scatter, each point represents a cell-associated barcode and two-dimensional horizontal and vertical coordinates of each dot represent the total number of umi mapped to GRCh38 or mm10, respectively. Each dot is colored according to the inferred cell type, where multiplet represents the same cell barcode shared by multiple cells."></label><br />
+            </div>
+        </div>
+        <div class="question" onclick="closeQuestion(this)">×</div>
+      </div>
+      <div class="content-chart4" style="margin: 10 auto;">
+        <div id="id-div-mix-data" style="width: 95%; padding: 0 20px;">
+                  <!-- mix指标 -->
+                <div class="data">
+                  <label en="Cell Barcodes with >0 Cells" zh="细胞>0的细胞标签数"></label>
+                  <div class="data-num">{{mix_report.Singlecell}}</div>
+                </div>
+                <div class="data">
+                  <label en="Cell Barcodes with >1 Cells" zh="细胞>1的细胞标签数"></label>
+                  <div class="data-num">{{mix_report.MixCells}}</div>
+                </div>
+                <div class="data">
+                  <label en="Multiplet Rate" zh="多细胞占比"></label>
+                  <div class="data-num">{{mix_report.Multipletrate}}</div>
+                </div>
+          </div>
+        <div id="id-mix-plot" style="height: 120%; width: 90%; margin: 0 auto; padding: 0 5px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Mapping -->
+<div style="display: flex;">
+	<div class="content1">
+          <div class="content-title">
+            <label en="Mapping" zh="比对"></label>
+            <div class="question" onclick="changeQuestion(this)">?</div>
+          </div>
+          <div class="content-detail">
+            <div class="content-question">
+              <div class="question-main">
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上基因组的Reads数："
+                  en="Reads Mapped Confidently to Genome:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在质控后的reads中，能成功比对上基因组且对比质量大于20的reads占比百分数。"
+                    en="The percentage of reads mapped to a unique genome with a mapping quality of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}基因组的Reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Genome:"></label><br />
+                <div style="margin: 0 0 10px 30px;"><label
+                    zh="本项反映了在质控后的reads中，能成功比对上{{annotated_report.sampleA.name}}基因组且对比质量大于20的reads占比百分数。"
+                    en="The percentage of reads mapped to a unique {{annotated_report.sampleA.name}} genome with a mapping quality of 20 or higher."></label><br />
+                </div-->
+                <!-- sampleB -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleBname}}基因组的Reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Genome:"></label><br />
+                <div style="margin: 0 0 10px 30px;"><label
+                    zh="本项反映了在质控后的reads中，能成功比对上{{annotated_report.sampleA.name}}基因组且对比质量大于20的reads占比百分数。"
+                    en="The percentage of reads mapped to a unique {{annotated_report.sampleB.name}} genome with a mapping quality of 20 or higher."></label><br />
+                </div-->
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上基因的Reads数："
+                  en="Reads Mapped Confidently to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上基因的reads占比百分数。"
+                    en="The percentage of reads mapped to a reference genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <!--label style="font-weight: bold;" zh="比对{{annotated_report.sampleA.name}}上基因的Reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上基因的reads占比百分数。"
+                    en="The percentage of reads mapped to a {{annotated_report.sampleA.name}} reference genome with a mapping quality score of 20 or higher."></label><br />
+                </div-->
+                <!-- sampleB -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}基因组的Reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上基因的reads占比百分数。"
+                    en="The percentage of reads mapped to a {{annotated_report.sampleB.name}} reference genome with a mapping quality score of 20 or higher."></label><br />
+                </div-->
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上外显子区的reads数："
+                  en="Reads Mapped Confidently to Exonic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the exonic regions of the genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}外显子区的reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Exonic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the exonic regions of the {{annotated_report.sampleA.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div-->
+                <!-- sampleB -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}外显子区的reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Exonic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上参考基因组外显子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the exonic regions of the {{annotated_report.sampleB.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div-->
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上内含子区的reads数："
+                  en="Reads Mapped Confidently to Intronic Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the intron regions of the genome with a mapping quality score of 20 or higher."></label><br />
+                </div>
+                <!-- sampleA -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}内含子区的reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Intron Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the intron regions of the {{annotated_report.sampleA.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div-->
+                <!-- sampleB -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}内含子区的reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Intron Regions:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上参考基因组内含子区域的reads占比百分数。"
+                    en="The percentage of reads mapped to the intron regions of the {{annotated_report.sampleB.name}} genome with a mapping quality score of 20 or higher."></label><br />
+                </div-->
+
+                <!-- raw -->
+                <label style="font-weight: bold;" zh="比对上基因反义链的Reads数："
+                  en="Reads Mapped Antisense to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label zh="本项反映了在比对上基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
+                    en="The percentage of reads mapped antisense to genes."></label>
+                </div>
+                <!-- sampleA -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleA.name}}基因反义链的Reads数："
+                  en="{{annotated_report.sampleA.name}} Reads Mapped Antisense to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label
+                    zh="本项反映了在比对上{{annotated_report.sampleA.name}}基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
+                    en="The percentage of {{annotated_report.sampleA.name}} reads mapped antisense to genes."></label>
+                </div-->
+                <!-- sampleB -->
+                <!--label style="font-weight: bold;" zh="比对上{{annotated_report.sampleB.name}}基因反义链的Reads数："
+                  en="{{annotated_report.sampleB.name}} Reads Mapped Antisense to Gene:"></label><br />
+                <div style="margin: 0 0 10px 30px;">
+                  <label
+                    zh="本项反映了在比对上{{annotated_report.sampleB.name}}基因组的reads中，能成功比对上基因，但却位于反义链的reads占百分数。由于reads与理论建库片段方向不一致，此部分reads将被过滤掉。"
+                    en="The percentage of {{annotated_report.sampleB.name}} reads mapped antisense to genes."></label>
+                </div-->
+              </div>
+              <div class="question" onclick="closeQuestion(this)">×</div>
+            </div>
+            <div class="content-data1">
+              <div class="data">
+                <label en="Reads Mapped Confidently to Genome" zh="比对上基因组的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoGenome}}</div>
+              </div>
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Genome"
+                  zh="比对上{{annotated_report.sampleA.name}}基因组的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoGenome}}</div>
+              </div-->
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Genome"
+                  zh="比对上{{annotated_report.sampleB.name}}基因组的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoGenome}}</div>
+              </div-->
+
+              <div class="data">
+                <label en="Reads Mapped Confidently to Gene" zh="比对上基因的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoGene}}</div>
+              </div>
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Gene"
+                  zh="比对上{{annotated_report.sampleA.name}}基因的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoGene}}</div>
+              </div-->
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Gene"
+                  zh="比对上{{annotated_report.sampleA.name}}基因的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoGene}}</div>
+              </div-->
+
+              <div class="data">
+                <label en="Reads Mapped Confidently to Exonic Regions" zh="比对上外显子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoExonicRegions}}</div>
+              </div>
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Exonic Regions"
+                  zh="比对上{{annotated_report.sampleA.name}}外显子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoExonicRegions}}</div>
+              </div-->
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Exonic Regions"
+                  zh="比对上{{annotated_report.sampleB.name}}外显子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoExonicRegions}}</div>
+              </div-->
+
+              <div class="data">
+                <label en="Reads Mapped Confidently to Intronic Regions" zh="比对上内含子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedConfidentlytoIntronicRegions}}</div>
+              </div>
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Confidently to Intronic Regions"
+                  zh="比对上{{annotated_report.sampleA.name}}内含子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedConfidentlytoIntronicRegions}}</div>
+              </div-->
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Confidently to Intronic Regions"
+                  zh="比对上{{annotated_report.sampleB.name}}内含子区的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedConfidentlytoIntronicRegions}}</div>
+              </div-->
+
+              <div class="data">
+                <label en="Reads Mapped Antisense to Gene" zh="比对上基因反义链的Reads数"></label>
+                <div class="data-num">{{annotated_report.ReadsMappedAntisensetoGene}}</div>
+              </div>
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleA.name}} Reads Mapped Antisense to Gene"
+                  zh="比对上{{annotated_report.sampleA.name}}基因反义链的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleA.ReadsMappedAntisensetoGene}}</div>
+              </div-->
+
+              <!--div class="data">
+                <label en="{{annotated_report.sampleB.name}} Reads Mapped Antisense to Gene"
+                  zh="比对上{{annotated_report.sampleB.name}}基因反义链的Reads数"></label>
+                <div class="data-num">{{annotated_report.sampleB.ReadsMappedAntisensetoGene}}</div>
+              </div-->
+            </div>
+          </div>
+        </div>
+	
       <!-- sample -->
       <div class="content1">
         <div class="content-title">
@@ -662,11 +663,23 @@
         $("#en").addClass("language-active");
         line_1_option.xAxis.name = 'Barcodes';
         line_1_option.yAxis.name = 'UMI counts';
+        line_1_option.toolbox.feature.dataZoom = {title:{zoom:"Zoom",back:"Zoom Revoke"}};
+	line_1_option.toolbox.feature.restore = {title:"Restore"};
+	line_1_option.toolbox.feature.saveAsImage = {title:"Download"};
+	mix_plot_option.toolbox.feature.dataZoom = {title:{zoom:"Zoom",back:"Zoom Revoke"}};
+	mix_plot_option.toolbox.feature.restore = {title:"Restore"};
+	mix_plot_option.toolbox.feature.saveAsImage = {title:"Download"};
 
       } else {
         $("#zh").addClass("language-active");
         line_1_option.xAxis.name = '条形码数';
         line_1_option.yAxis.name = 'UMI 数';
+        line_1_option.toolbox.feature.dataZoom = {title:{zoom:"区域缩放",back:"区域缩放还原"}};
+	line_1_option.toolbox.feature.restore = {title:"还原"};
+	line_1_option.toolbox.feature.saveAsImage = {title:"下载图片"};
+	mix_plot_option.toolbox.feature.dataZoom = {title:{zoom:"区域缩放",back:"区域缩放还原"}};
+	mix_plot_option.toolbox.feature.restore = {title:"还原"};
+	mix_plot_option.toolbox.feature.saveAsImage = {title:"下载图片"};
       }
 
       echarts.init($("#boxplot_1")[0]).setOption(boxplot_1_option, true);
@@ -682,8 +695,8 @@
     var mix_plot_option = {
         legend: {
           orient: 'vertical',
-          right: "5%",
-          top: "12%"
+          right: "20%",
+          top: "20%"
         },
         toolbox: {
           right: 15,

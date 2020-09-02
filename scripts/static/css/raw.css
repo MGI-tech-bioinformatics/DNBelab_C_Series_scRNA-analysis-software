@@ -123,6 +123,7 @@
   }
 
   .content-detail {
+      margin-bottom: 10px;
       display: flex;
       flex-wrap: wrap;
       border: solid 1px #dddddd;
