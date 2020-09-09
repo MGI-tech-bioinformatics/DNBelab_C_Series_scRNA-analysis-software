@@ -97,6 +97,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 * [python3](https://www.python.org/downloads/)  (3.6+) #  with following Python3 packages installed
   * numpy
   * pandas
+  * python-igraph
   * scanpy(1.4.3+)
   * jinja2(2.10.3+)
 
