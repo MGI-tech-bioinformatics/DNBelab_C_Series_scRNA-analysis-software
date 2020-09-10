@@ -98,6 +98,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
   * numpy
   * pandas
   * python-igraph
+  * louvain
   * scanpy(1.4.3+)
   * jinja2(2.10.3+)
 
