@@ -16,6 +16,7 @@ We provide two example JSON files including [single-species](https://github.com/
 | `main.root`   	| Directory | MANDATORY. Directory of this pipeline.               |
 | `main.expectCell` | Integer 	| Optional, default: 0. Expected cell number.               |
 | `main.forceCell` | Integer 	| Optional, default: 0. Specified number of cells.               |
+| `main.umiCount` | Integer 	| Optional, default: 0. Threshold of barcode's umi, anything above that would be defined as contribution from vaid cells.               |
 | `main.umilow` | Integer 	| Optional, default: 50. Expected UMIs count per cell threshold.               |
 | `main.config` 	| JSON file | MANDATORY. Read structure configure. UMI and Cell Barcode specified in this file. Can be found at `config/` directory.              |
 | `main.Rscript` 	| Path 		| MANDATORY. Path to Rscript.               |
