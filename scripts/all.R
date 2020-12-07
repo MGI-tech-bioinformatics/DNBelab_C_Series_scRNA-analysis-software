@@ -12,6 +12,7 @@ arg<-matrix(c("input", "i","1","character","Path of input file",
               "output","o","2","character","Path of output directory",
               "force","f","1","numeric","Force cells number to analysis. You must set -f or -e to process barcode list.",
               "expect","e","1","numeric","Number of expect cells",
+              "umi","u","1","numeric","Number of umi count threshold",
               "low","l","1","numeric","lower bound on the total UMI count.",
               "help"  ,"h","2","logical",  "This information"),
             byrow=T,ncol=5
@@ -40,16 +41,24 @@ b = log10(sor)
 expect <- 0
 cutoff <- 0
 m <- 0
+umi <- 0
 low = 50
 if (!is.null(opt$expect)) {
     expect=as.numeric(opt$expect)
+}
+
+if (!is.null(opt$umi)) {
+    umi=as.numeric(opt$umi)
 }
 
 if (!is.null(opt$low)) {
     low=as.numeric(opt$low)
 }
 
-if (expect >0) {
+if (umi >0) {
+    cutoff<-length(which(sor>=umi))
+    m <- umi
+}else if (expect >0) {
     c = log10(expect*1.7)
     if(10^c>len){c=log10(expect)}
     lo <- loess(b~a,span = 0.004,degree = 2)
@@ -60,7 +69,14 @@ if (expect >0) {
     m = 10 ^ out[infl] + 0.5
     m = round(m , digits =0 )
     cutoff<-length(which(sor>=m))
-} else {
+}else if(!is.null(opt$force)) {
+    force = as.numeric(opt$force)
+    if (force > 0) {
+        expect = force
+        cutoff = expect
+        m = sor[cutoff]
+    }
+}else {
    # trace(barcodeRanks, quote(totals <- m[,1]), at=3)
    # test=bc[3]
    # colnames(test)="count"
@@ -76,15 +92,6 @@ if (expect >0) {
     if(cutoff >= 10000){
         cutoff=10000
         m = bc[10000,3]
-    }
-}
-
-if (!is.null(opt$force)) {
-    force = as.numeric(opt$force)
-    if (force > 0) {
-        expect = force
-        cutoff = expect
-        m = sor[cutoff]
     }
 }
 

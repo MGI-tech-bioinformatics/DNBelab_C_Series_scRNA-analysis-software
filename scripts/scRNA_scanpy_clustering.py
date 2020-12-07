@@ -31,7 +31,7 @@ sc.pp.normalize_per_cell(adata, counts_per_cell_after=1e4)
 sc.pp.log1p(adata)
 adata.raw = adata
 with open("%s/cell_report.csv" % result_dir, "a") as o:
-    o.write("Number of cells used for clustering,%s\nTotal Genes Detected,%s" % (adata.n_obs, adata.n_vars))
+    o.write("Number of cells used for clustering,%s\nTotal Genes Detected,%s\n" % (adata.n_obs, adata.n_vars))
 o.close()
 
 ###差异表达基因
