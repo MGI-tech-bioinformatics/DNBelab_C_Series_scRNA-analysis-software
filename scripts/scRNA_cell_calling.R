@@ -55,6 +55,9 @@ if (!is.null(opt$umi)) {
 if (!is.null(opt$low)) {
     low=as.numeric(opt$low)
 }
+if (!is.null(opt$force)) {
+    force = as.numeric(opt$force)
+}
 if (umi >0) {
     cutoff<-length(which(sor>=umi))
     m <- umi
@@ -69,13 +72,10 @@ if (umi >0) {
     m = 10 ^ out[infl] + 0.5
     m = round(m , digits =0 )
     cutoff<-length(which(sor>=m))
-}else if (!is.null(opt$force)) {
-    force = as.numeric(opt$force)
-    if (force > 0) {
-        expect = force
-        cutoff = expect
-        m = sor[cutoff]
-    }
+}else if (force > 0) {
+    expect = force
+    cutoff = expect
+    m = sor[cutoff]
 } else {
    # trace(barcodeRanks, quote(totals <- m[,1]), at=3)
    # test=bc[3]
