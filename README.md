@@ -57,7 +57,7 @@ Running
    10x sequence data:
    docker run -d -P \
    --name $scRNANAME \
-   -v $DB_LOCAL: /DNBelab_C4/database \
+   -v $DB_LOCAL:/DNBelab_C4/database \
    -v $DATA_LOCAL:/DNBelab_C4/rawfq \
    -v $RESULT_LOCAL:/DNBelab_C4/result \
    huangshunkai/dnbelab_c4:latest \
@@ -67,7 +67,7 @@ Running
    mgi sequence data:
    docker run -d -P \
    --name $scRNANAME \
-   -v $DB_LOCAL: /DNBelab_C4/database \
+   -v $DB_LOCAL:/DNBelab_C4/database \
    -v $DATA_LOCAL:/DNBelab_C4/rawfq \
    -v $RESULT_LOCAL:/DNBelab_C4/result \
    huangshunkai/dnbelab_c4:latest \
