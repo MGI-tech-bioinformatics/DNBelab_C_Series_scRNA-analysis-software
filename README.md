@@ -107,7 +107,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 * [PISA](https://github.com/shiquan/LISA)
 * [sambamba](https://lomereiter.github.io/sambamba/)
 * [STAR](https://github.com/alexdobin/STAR)
-
+run `chmod +x *` in `bin` dir to make them executable
 
 # Database
 
