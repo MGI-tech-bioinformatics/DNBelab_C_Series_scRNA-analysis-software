@@ -148,8 +148,8 @@ An input JSON file includes all input parameters and genome reference index dire
 ## Example - single_Species
 
 - Step 1: Prepare fastq
-We provide 100MB [Demo](https://pan.genomics.cn/ucdisk/s/bAn63e) sequencing data for testing.
-We also provide 36GB PBMCs sample fastq by pairs sequencing for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0232089/CNX0190688/CNR0248280/)
+We provide 100MB [Demo](https://bgitech-my.sharepoint.com/:f:/g/personal/huangshunkai_genomics_cn/EhbcIp5iKe1Ksq1Pf-7v0yIBkWNJvH08JX89rdlPOU1KVQ?e=dlHa4F) sequencing data for testing.
+We also provide 36GB PBMCs sample fastq by pairs sequencing for download [fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0232089/CNX0190688/CNR0248280/).
 
 - Step 2: Setup configure file.
 ```
@@ -210,7 +210,7 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
 Please refer to [Database](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software#Database)
 
 - Step 1: Prepare fastq
-We provide 135MB [Demo](https://pan.genomics.cn/ucdisk/s/rIVJVf) sequencing data for testing.
+We provide 135MB [Demo](https://bgitech-my.sharepoint.com/:f:/g/personal/huangshunkai_genomics_cn/EneE2O8UOZxCj5S7FTSfdQ8BGhtk2KxuSbqClHJ7l-nKLw?e=mOJjiF) sequencing data for testing.
 We also provide 52GB Mixed Sample(GRCh38 & mm10) pairs sequencing fastq for download[fastq](http://ftp.cngb.org/pub/CNSA/data2/CNP0000906/CNS0196715/CNX0144387/CNR0177382/)
 
 - Step 2: Setup configure file.
