@@ -38,7 +38,7 @@ Prepare
     "main.fastq2": "/DNBelab_C4/rawfq/demo_2.fq.gz",                 
     "main.ID": "Demo_single",                                        
     "main.forceCell": "0",                                          
-    "main.umilow": "50",                                           
+    "main.umilow": "1000",                                           
     "main.species":"GRCh38",                                    
     "main.original":"cell lines",                            
     "main.SampleTime":"2020-06-25",                         
@@ -57,7 +57,7 @@ Running
    10x sequence data:
    docker run -d -P \
    --name $scRNANAME \
-   -v $DB_LOCAL: /DNBelab_C4/database \
+   -v $DB_LOCAL:/DNBelab_C4/database \
    -v $DATA_LOCAL:/DNBelab_C4/rawfq \
    -v $RESULT_LOCAL:/DNBelab_C4/result \
    huangshunkai/dnbelab_c4:latest \
@@ -67,7 +67,7 @@ Running
    mgi sequence data:
    docker run -d -P \
    --name $scRNANAME \
-   -v $DB_LOCAL: /DNBelab_C4/database \
+   -v $DB_LOCAL:/DNBelab_C4/database \
    -v $DATA_LOCAL:/DNBelab_C4/rawfq \
    -v $RESULT_LOCAL:/DNBelab_C4/result \
    huangshunkai/dnbelab_c4:latest \
@@ -87,7 +87,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 
 ## Users need to install manually
 * [java](https://www.oracle.com/java/)
-* [Cromwell](https://github.com/broadinstitute/cromwell/releases/download/35/cromwell-35.jar)
+* [Cromwell](https://github.com/broadinstitute/cromwell/releases)
 * [R](https://www.r-project.org/)  (3.5+) #  with following R packages installed
   * ggplot2
   * getopt
@@ -104,7 +104,7 @@ $ git clone https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-an
 
   
 ## Pre-compiled executables within binary releases
-* [PISA](https://github.com/shiquan/LISA)
+* [PISA](https://github.com/MGI-tech-bioinformatics/DNBelab_C_Series_scRNA-analysis-software/blob/master/bin/PISA)
 * [sambamba](https://lomereiter.github.io/sambamba/)
 * [STAR](https://github.com/alexdobin/STAR)
 
@@ -164,8 +164,6 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38/gtf/genes.gtf",
     "main.ID": "demo",
-    "main.forceCell": "0",
-    "main.umilow": "50",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/single_Species/result",
     "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
     "main.Rscript":"/User/Pub/third_party/Rscript",
@@ -228,8 +226,6 @@ $ cat config.json
     "main.root": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software",
     "main.gtf": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/databases/GRCh38_mm10/gtf/genes.gtf",
     "main.ID": "demo",
-    "main.forceCell": "0",
-    "main.umilow": "50",
     "main.chrom":"/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/species_binding.txt",
     "main.outdir": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/example/double_Species/result",
     "main.config": "/User/pipeline/DNBelab_C_Series_scRNA-analysis-software/config/DNBelabC4_scRNA_readStructure.json",
@@ -294,6 +290,6 @@ So the final html report is at `outdir Path`/report/iDrop_*.html
 
 6. Why the inflection point is inaccurate on the total count curve?
 
-   You can specify "main.umilow" in the configure file like "main.umilow": "50". "main.umilow" is a numeric scalar specifying the lower bound on the total UMI count, at or below which all barcodes are assumed to correspond to empty droplets, default 50.
+   You can specify "main.umilow" in the configure file like "main.umilow": "1000". "main.umilow" is a numeric scalar specifying the lower bound on the total UMI count, at or below which all barcodes are assumed to correspond to empty droplets, default 50.
 
 

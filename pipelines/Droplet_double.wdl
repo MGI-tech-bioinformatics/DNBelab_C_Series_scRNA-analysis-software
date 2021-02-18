@@ -96,19 +96,14 @@ task report {
   String outdir
   String root
   String list
-  Int cpp=2
+  Int cpp=20
   command {
-    if [ -f ${outdir}/symbol/report_sigh.txt ];then
-      echo "report node success"
-    else
       echo "Name,${ID}" > ${outdir}/report/sample.csv &&\
       echo "Original,${default=Null original}" >>  ${outdir}/report/sample.csv &&\
       echo "Species,${default=Null species}" >> ${outdir}/report/sample.csv &&\
       echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv &&\
       echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv &&\
-      ${Python3} ${root}/scripts/idrop.py two ${outdir}/report iDrop_${ID} &&\
-      echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/report_sigh.txt
-    fi
+      ${Python3} ${root}/scripts/idrop.py two ${outdir}/report iDrop_${ID}
   }
 }
 task cellCalling {
@@ -122,11 +117,8 @@ task cellCalling {
   Int ?umiCount
   Int ?umilow
   String ?lib
-  Int cpp=2
+  Int cpp=20
   command <<<
-    if [ -f ${outdir}/symbol/cellCalling_sigh.txt ];then
-      echo "cellCalling node success"
-    else
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
@@ -134,9 +126,7 @@ task cellCalling {
       sed -i '1d' ${outdir}/temp/tmp_id.txt &&\
       ${root}/bin/PISA attrcnt -cb CB -tags UB,GN -list ${outdir}/temp/tmp_id.txt -group SP -dedup -o ${outdir}/temp/cell_counts_tmp.tsv -@ ${cpp} ${bam} &&\
       paste ${count} ${outdir}/temp/cell_counts_tmp.tsv |awk '{print$1"\t"$2"\t"$3"\t"$4"\t"$7"\t"$8"\t"$9"\t"$10}' > ${outdir}/temp/cell_counts_all.tsv &&\
-      ${Rscript} ${root}/scripts/all.R -i ${outdir}/temp/cell_counts_all.tsv -o ${outdir}/report -e ${default=0 expectCell}  -f ${default=0 forceCell} -u ${default=0 umiCount} -l ${default=50 umilow} &&\
-      echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
-    fi
+      ${Rscript} ${root}/scripts/all.R -i ${outdir}/temp/cell_counts_all.tsv -o ${outdir}/report -e ${default=0 expectCell}  -f ${default=0 forceCell} -u ${default=0 umiCount} -l ${default=1000 umilow}
   >>>
   output {
     String list="${outdir}/outs/cell_barcodes.txt"
@@ -148,7 +138,7 @@ task cellCount {
   String root
   String rawlist
   String ?lib
-  Int cpp=4
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/cellCount_sigh.txt ];then
       echo "cellCount node success"
@@ -191,7 +181,7 @@ task parseFastq {
   String ?runID
   String root
   String ?lib
-  Int cpp=8
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/parseFastq_sigh.txt ];then
       echo "parseFastq node success"
@@ -217,7 +207,7 @@ task fastq2bam {
   String refdir
   String root
   String ?lib
-  Int cpp=8
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/fastq2bam_sigh.txt ];then
       echo "fastq2bam node success"
@@ -242,7 +232,7 @@ task sortBam {
   String gtf
   String ?lib
   String ?chrom
-  Int cpp=8
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/sortBam_sigh.txt ];then
       echo "sortBam node success"

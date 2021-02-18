@@ -124,7 +124,7 @@ task parseFastq {
   String ?runID
   String root
   String ?lib
-  Int cpp=1
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/parseFastq_sigh.txt ];then
       echo "parseFastq node success"
@@ -151,7 +151,7 @@ task fastq2bam {
   String refdir
   String root
   String ?lib
-  Int cpp=4
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/fastq2bam_sigh.txt ];then
       echo "fastq2bam node success"
@@ -159,7 +159,7 @@ task fastq2bam {
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${root}/bin/STAR --outStd SAM --outSAMunmapped Within --runThreadN ${cpp} --genomeDir ${refdir} --readFilesCommand gzip -dc --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ 1> aln.sam &&\
+      ${root}/bin/STAR --outSAMmultNmax 1 --outStd SAM --outSAMunmapped Within --runThreadN ${cpp} --genomeDir ${refdir} --readFilesCommand gzip -dc --readFilesIn ${fastq} --outFileNamePrefix ${outdir}/temp/ 1> aln.sam &&\
       ${root}/bin/PISA sam2bam -@ ${cpp} -k -o ${outdir}/temp/aln.bam -report ${outdir}/report/alignment_report.csv aln.sam && rm -f aln.sam &&\
       echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/fastq2bam_sigh.txt
     fi
@@ -176,7 +176,7 @@ task sortBam {
   String outdir
   String gtf
   String ?lib
-  Int cpp=1
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/sortBam_sigh.txt ];then
       echo "sortBam node success"
@@ -201,7 +201,7 @@ task cellCount {
   String root
   String rawlist
   String ?lib
-  Int cpp=1
+  Int cpp=20
   command {
     if [ -f ${outdir}/symbol/cellCount_sigh.txt ];then
       echo "cellCount node success"
@@ -227,17 +227,12 @@ task cellCalling {
   Int ?umiCount
   Int ?umilow
   String ?lib
-  Int cpp=1
+  Int cpp=20
   command {
-    if [ -f ${outdir}/symbol/cellCalling_sigh.txt ];then
-      echo "cellCalling node success"
-    else
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
-      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -u ${default=0 umiCount} -l ${default=50 umilow} &&\
-      echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/cellCalling_sigh.txt
-    fi
+      ${Rscript} ${root}/scripts/scRNA_cell_calling.R -i ${count} -o ${outdir}/outs -e ${default=0 expectCell}  -f ${default=0 forceCell} -u ${default=0 umiCount} -l ${default=1000 umilow}
   }
   output {
     String list="${outdir}/outs/cell_barcodes.txt"
@@ -254,11 +249,8 @@ task countMatrix {
   String ?Python3
   String ID
   Int ?expectCell
-  Int cpp=1
+  Int cpp=20
   command {
-    if [ -f ${outdir}/symbol/countMatrix_sigh.txt ];then
-      echo "countMatrix node success"
-    else
       if [ -f ${default=abjdbashj lib} ]; then
         source ${lib}
       fi
@@ -266,9 +258,7 @@ task countMatrix {
       ${root}/bin/PISA count -@ ${cpp} -tag CB -anno_tag GN -umi UB -o ${outdir}/outs/raw_count_mtx.tsv -list ${rawlist} ${anno} &&\
       gzip -f ${outdir}/outs/count_mtx.tsv ${outdir}/outs/raw_count_mtx.tsv &&\
       ${Python3} ${root}/scripts/scRNA_scanpy_clustering.py ${outdir}/outs/count_mtx.tsv.gz ${outdir}/report/ &&\
-      echo "[`date +%F` `date +%T`] workflow end" >> ${outdir}/workflowtime.log &&\
-      echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/countMatrix_sigh.txt
-    fi
+      echo "[`date +%F` `date +%T`] workflow end" >> ${outdir}/workflowtime.log
   }
   output {
     String matrix = "${outdir}/outs/count_mtx.tsv.gz"
@@ -284,19 +274,14 @@ task report {
   String outdir
   String root
   String matrix
-  Int cpp=1
+  Int cpp=20
   command {
-    if [ -f ${outdir}/symbol/report_sigh.txt ];then
-      echo "report node success"
-    else
       echo "Name,${ID}" > ${outdir}/report/sample.csv &&\
       echo "Original,${default=Null original}" >>  ${outdir}/report/sample.csv &&\
       echo "Species,${default=Null species}" >> ${outdir}/report/sample.csv &&\
       echo "Sampling time,${default=Null SampleTime}" >> ${outdir}/report/sample.csv &&\
       echo "Experimental time,${default=Null ExperimentalTime}" >> ${outdir}/report/sample.csv &&\
-      ${Python3} ${root}/scripts/idrop.py single ${outdir}/report iDrop_${ID} &&\
-      echo "[`date +%F` `date +%T`] Nothing is True. Everything is permitted." > ${outdir}/symbol/report_sigh.txt
-    fi
+      ${Python3} ${root}/scripts/idrop.py single ${outdir}/report iDrop_${ID}
   }
 }
 
